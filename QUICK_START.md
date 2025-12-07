@@ -26,7 +26,7 @@ cp .env.example .env
 # Get OpenAI key from: https://platform.openai.com/api-keys
 ```
 
-Edit `.env`:
+Edit `.env`:    
 ```
 GEMINI_API_KEY=your-actual-key-here
 # OR

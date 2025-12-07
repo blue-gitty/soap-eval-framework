@@ -44,6 +44,10 @@ reports/*.csv
 reports/*.json
 !reports/.gitkeep
 
+# Logs (not tracked)
+reports/logs/
+*.log
+
 # IDE
 .vscode/
 .idea/
