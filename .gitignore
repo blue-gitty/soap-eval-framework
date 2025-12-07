@@ -10,6 +10,19 @@ __pycache__/
 dist/
 build/
 
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+virtualenv/
+.virtualenv/
+pipenv/
+.pipenv/
+conda/
+.conda/
+sampler/
 # Environment & Secrets
 .env
 .env.local

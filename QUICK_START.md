@@ -6,10 +6,12 @@ Get the evaluation framework running in 5 minutes.
 
 ```bash
 git clone https://github.com/blue-gitty/soap-eval-framework.git
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+python -m venv venv  # Or any name: python -m venv myenv
+source venv/bin/activate  # Windows: .\venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 ```
+
+**Note**: If you use a custom venv name (e.g., `sampler`, `myenv`), add it to `.gitignore` to prevent tracking.
 
 ## Step 2: Configure API Key & Models (1 min)
 
