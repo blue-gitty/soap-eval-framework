@@ -2,6 +2,8 @@
 
 A comprehensive evaluation framework for clinical SOAP note generation, featuring reference-based, non-reference, and self-validation pipelines with meta-analysis.
 
+> 💡 **Design Philosophy**: See [IDEA.md](IDEA.md) for detailed explanation of the thought process, architecture decisions, and design rationale behind this framework.
+
 ## 🚀 Quick Start (5 Minutes)
 
 **For fastest setup, see [QUICK_START.md](QUICK_START.md)**
