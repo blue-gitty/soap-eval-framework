@@ -1,0 +1,3454 @@
+[
+  {
+    "id": 0,
+    "health_problem": "Joint Pain",
+    "hallucination_rate": 0.2308,
+    "coverage_rate": 0.7692,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.231,
+      "reason": "Low Coverage",
+      "priority": "medium"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|unsupported_diagnosis|dangerous_omission|other",
+          "statement": "Model invented 'tenderness to palpation' and 'order x-rays of right knee and left ankle' and 'educate on joint protection strategies'",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Remove unsupported test OR verify in EHR"
+        },
+        {
+          "category": "hallucinated_medication|missing_critical_finding|unsupported_diagnosis|dangerous_omission|other",
+          "statement": "Model invented 'educate on joint protection strategies'",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "HIGH",
+          "fix": "Remove unsupported test OR verify in EHR"
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 13,
+      "model": 13
+    },
+    "details": {
+      "transcript_facts": [
+        "knee pain",
+        "ankle pain",
+        "joint pain",
+        "decreased mobility",
+        "osteoarthritis",
+        "ibuprofen",
+        "order further testing",
+        "refer to physical therapy",
+        "medication prescription",
+        "follow up in a few weeks",
+        "ibuprofen causes stomach discomfort",
+        "pain worse with walking/standing",
+        "pain better with sitting/lying down"
+      ],
+      "model_facts": [
+        "constant, dull, achy pain in right knee",
+        "constant, dull, achy pain in left ankle",
+        "osteoarthritis",
+        "ibuprofen",
+        "order x-rays of right knee and left ankle",
+        "prescribe acetaminophen",
+        "refer to physical therapy",
+        "educate on joint protection strategies",
+        "schedule follow-up appointment in four weeks",
+        "pain exacerbated by prolonged walking or standing",
+        "pain alleviated by rest",
+        "limited range of motion",
+        "tenderness to palpation"
+      ],
+      "hallucinated_facts": [
+        "tenderness to palpation",
+        "order x-rays of right knee and left ankle",
+        "educate on joint protection strategies"
+      ],
+      "missing_facts": [
+        "osteoarthritis",
+        "ibuprofen causes stomach discomfort",
+        "order further testing"
+      ],
+      "matched_transcript_facts": [
+        "pain better with sitting/lying down",
+        "ibuprofen",
+        "ankle pain",
+        "joint pain",
+        "medication prescription",
+        "follow up in a few weeks",
+        "knee pain",
+        "refer to physical therapy",
+        "decreased mobility",
+        "pain worse with walking/standing"
+      ]
+    }
+  },
+  {
+    "id": 1,
+    "health_problem": "Gastrointestinal Issues",
+    "hallucination_rate": 0.4,
+    "coverage_rate": 0.8,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.34,
+      "reason": "High Hallucination",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|unsupported_diagnosis|dangerous_omission|other",
+          "statement": "Model hallucinated 'weight loss due to decreased appetite', 'chronic gastrointestinal issues', 'vital signs within normal limits', 'no acute distress', 'schedule follow-up appointment in 2 weeks', 'gerd medication as prescribed', 'no visible evidence of acute inflammation or infection'",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Remove hallucinated statements and ensure all relevant findings are documented. Verify all tests and medications in EHR."
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Missing 'recent trip to mexico not related', 'stress worsens symptoms', 'fullness'",
+          "risk_impact": "documentation_quality|treatment_delay",
+          "severity": "HIGH",
+          "fix": "Clinician to explicitly document missing information."
+        }
+      ],
+      "production_score": 0.3,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 15,
+      "model": 20
+    },
+    "details": {
+      "transcript_facts": [
+        "heartburn",
+        "stomach pain",
+        "bloating",
+        "abdominal discomfort",
+        "diarrhea",
+        "fullness",
+        "nausea",
+        "vomiting",
+        "fatigue",
+        "order endoscopy",
+        "blood tests",
+        "keep food diary",
+        "spicy foods worsen heartburn",
+        "stress worsens symptoms",
+        "recent trip to mexico not related"
+      ],
+      "model_facts": [
+        "heartburn",
+        "sharp stomach pain",
+        "bloating",
+        "abdominal discomfort",
+        "intermittent diarrhea",
+        "nausea",
+        "vomiting",
+        "weight loss due to decreased appetite",
+        "fatigue",
+        "chronic gastrointestinal issues",
+        "gerd medication as prescribed",
+        "order endoscopy with biopsies",
+        "order blood tests including cbc, cmp, and stool studies",
+        "initiate a food diary",
+        "schedule follow-up appointment in 2 weeks",
+        "spicy foods and stress may exacerbate symptoms",
+        "no visible evidence of acute inflammation or infection",
+        "patient is alert and oriented",
+        "vital signs within normal limits",
+        "no acute distress"
+      ],
+      "hallucinated_facts": [
+        "patient is alert and oriented",
+        "chronic gastrointestinal issues",
+        "vital signs within normal limits",
+        "no acute distress",
+        "weight loss due to decreased appetite",
+        "no visible evidence of acute inflammation or infection",
+        "schedule follow-up appointment in 2 weeks",
+        "gerd medication as prescribed"
+      ],
+      "missing_facts": [
+        "recent trip to mexico not related",
+        "stress worsens symptoms",
+        "fullness"
+      ],
+      "matched_transcript_facts": [
+        "keep food diary",
+        "vomiting",
+        "fatigue",
+        "spicy foods worsen heartburn",
+        "bloating",
+        "nausea",
+        "order endoscopy",
+        "blood tests",
+        "stomach pain",
+        "heartburn",
+        "diarrhea",
+        "abdominal discomfort"
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "health_problem": "Ear Infections",
+    "hallucination_rate": 0.1667,
+    "coverage_rate": 0.8125,
+    "triage": {
+      "needs_judge": false,
+      "risk_score": 0.173,
+      "reason": "Low Coverage",
+      "priority": "medium"
+    },
+    "judge_evaluation": null,
+    "fact_counts": {
+      "transcript": 16,
+      "model": 18
+    },
+    "details": {
+      "transcript_facts": [
+        "persistent cough",
+        "tiredness",
+        "low-grade fever",
+        "shortness of breath",
+        "chest pain",
+        "tight chest",
+        "hearing loss",
+        "ringing in ears",
+        "antibiotic",
+        "penicillin",
+        "order complete blood count",
+        "order chest x-ray",
+        "order nasal swab",
+        "follow up with specialist for ear issues",
+        "use humidifier",
+        "history of diabetes"
+      ],
+      "model_facts": [
+        "dry cough for the past few weeks",
+        "fatigue",
+        "low-grade fever",
+        "chest tightness",
+        "intermittent hearing loss",
+        "ringing sensation in ears",
+        "tinnitus",
+        "possible reaction to penicillin",
+        "order complete blood count (cbc)",
+        "order chest x-ray",
+        "obtain nasal swab for viral and bacterial cultures",
+        "prescribe broad-spectrum antibiotic",
+        "monitor blood sugar levels regularly",
+        "use humidifier",
+        "schedule follow-up appointment in 7 days",
+        "consult with an ent specialist",
+        "tinnitus",
+        "intermittent hearing loss"
+      ],
+      "hallucinated_facts": [
+        "tinnitus",
+        "schedule follow-up appointment in 7 days",
+        "monitor blood sugar levels regularly"
+      ],
+      "missing_facts": [
+        "shortness of breath",
+        "tight chest",
+        "history of diabetes"
+      ],
+      "matched_transcript_facts": [
+        "use humidifier",
+        "chest pain",
+        "persistent cough",
+        "order chest x-ray",
+        "order nasal swab",
+        "order complete blood count",
+        "tiredness",
+        "penicillin",
+        "antibiotic",
+        "follow up with specialist for ear issues",
+        "ringing in ears",
+        "low-grade fever",
+        "hearing loss"
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "health_problem": "Injuries",
+    "hallucination_rate": 0.6,
+    "coverage_rate": 0.6667,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.52,
+      "reason": "High Hallucination",
+      "priority": "critical"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|unsupported_diagnosis|dangerous_omission|other",
+          "statement": "Model hallucinated 'prescribe nsaid (e.g., ibuprofen or naproxen)', 'osteoarthritis', 'referred pain', 'educate patient on activity modification and proper body mechanics', 'vital signs within normal limits', 'stiffness', 'difficulty sleeping', 'persistent post-injury pain'",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Remove unsupported test OR verify in EHR"
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Model missing 'degenerative changes in hip joint', 'weakness in leg or foot', 'previous fall and hip injury'",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "CRITICAL",
+          "fix": "Add missing information to the model output"
+        }
+      ],
+      "production_score": 0.1,
+      "recommendation": "PRODUCTION_OK|QA_REVIEW|RETRAIN_PROMPT|MODEL_ISSUE",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 9,
+      "model": 15
+    },
+    "details": {
+      "transcript_facts": [
+        "pain in right hip",
+        "pain and stiffness in hip",
+        "weakness in leg or foot",
+        "acetaminophen",
+        "order imaging studies (x-ray or mri)",
+        "physical therapy",
+        "follow up in a few weeks",
+        "previous fall and hip injury",
+        "degenerative changes in hip joint"
+      ],
+      "model_facts": [
+        "chronic right hip pain",
+        "stiffness",
+        "difficulty sleeping",
+        "osteoarthritis",
+        "hip impingement",
+        "referred pain",
+        "persistent post-injury pain",
+        "acetaminophen",
+        "order x-ray of right hip",
+        "prescribe nsaid (e.g., ibuprofen or naproxen)",
+        "refer to physical therapy",
+        "schedule follow-up appointment in 2-4 weeks",
+        "educate patient on activity modification and proper body mechanics",
+        "tenderness to palpation in right hip",
+        "vital signs within normal limits"
+      ],
+      "hallucinated_facts": [
+        "tenderness to palpation in right hip",
+        "prescribe nsaid (e.g., ibuprofen or naproxen)",
+        "osteoarthritis",
+        "referred pain",
+        "educate patient on activity modification and proper body mechanics",
+        "vital signs within normal limits",
+        "stiffness",
+        "difficulty sleeping",
+        "persistent post-injury pain"
+      ],
+      "missing_facts": [
+        "degenerative changes in hip joint",
+        "weakness in leg or foot",
+        "previous fall and hip injury"
+      ],
+      "matched_transcript_facts": [
+        "acetaminophen",
+        "pain and stiffness in hip",
+        "follow up in a few weeks",
+        "order imaging studies (x-ray or mri)",
+        "pain in right hip",
+        "physical therapy"
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "health_problem": "Anxiety and Depression",
+    "hallucination_rate": 0.4211,
+    "coverage_rate": 0.8462,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.341,
+      "reason": "High Hallucination",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|dangerous_omission",
+          "statement": "Model hallucinated 'initiate antidepressant medication', 'monitor medication adherence and side effects', 'explore family support', 'discuss stress management techniques', 'schedule psychotherapy', 'consider genetic counseling', 'family history warrants careful consideration of potential genetic predispositions'",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "CRITICAL",
+          "fix": "Remove unsupported interventions OR verify in EHR"
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Missing 'schedule next appointment', 'discuss follow-up questions'",
+          "risk_impact": "documentation_quality",
+          "severity": "HIGH",
+          "fix": "Add missing elements to the note"
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 13,
+      "model": 19
+    },
+    "details": {
+      "transcript_facts": [
+        "feeling down",
+        "anxiety",
+        "difficulty sleeping",
+        "headaches",
+        "difficulty concentrating",
+        "fluoxetine",
+        "sertraline",
+        "schedule next appointment",
+        "discuss follow-up questions",
+        "family history of depression and suicide",
+        "weight loss",
+        "fatigue",
+        "muscle tension"
+      ],
+      "model_facts": [
+        "persistent feelings of sadness",
+        "anxiety",
+        "difficulty sleeping",
+        "decreased energy levels",
+        "difficulty concentrating",
+        "headaches",
+        "muscle tension",
+        "unintentional weight loss",
+        "stress",
+        "family history of depression and suicide",
+        "fluoxetine",
+        "sertraline",
+        "initiate antidepressant medication",
+        "schedule psychotherapy",
+        "discuss stress management techniques",
+        "explore family support",
+        "monitor medication adherence and side effects",
+        "consider genetic counseling",
+        "family history warrants careful consideration of potential genetic predispositions"
+      ],
+      "hallucinated_facts": [
+        "explore family support",
+        "discuss stress management techniques",
+        "schedule psychotherapy",
+        "initiate antidepressant medication",
+        "monitor medication adherence and side effects",
+        "stress",
+        "consider genetic counseling",
+        "family history warrants careful consideration of potential genetic predispositions"
+      ],
+      "missing_facts": [
+        "schedule next appointment",
+        "discuss follow-up questions"
+      ],
+      "matched_transcript_facts": [
+        "fluoxetine",
+        "fatigue",
+        "family history of depression and suicide",
+        "feeling down",
+        "difficulty concentrating",
+        "muscle tension",
+        "difficulty sleeping",
+        "headaches",
+        "weight loss",
+        "anxiety",
+        "sertraline"
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "health_problem": "Anxiety and Depression",
+    "hallucination_rate": 0.5714,
+    "coverage_rate": 0.6923,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.492,
+      "reason": "High Hallucination",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|unsupported_diagnosis|dangerous_omission|other",
+          "statement": "Hallucinated medication 'ssri (e.g., sertraline)' and 'start ssri'.",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Verify medication orders and treatment plans with clinician.  Remove hallucinated elements."
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Missing 'feeling down', 'headaches', 'difficulty avoiding triggers', and 'loss of appetite'.",
+          "risk_impact": "documentation_quality|treatment_delay",
+          "severity": "HIGH",
+          "fix": "Clinician to confirm all symptoms and relevant history."
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 13,
+      "model": 21
+    },
+    "details": {
+      "transcript_facts": [
+        "anxiety",
+        "difficulty sleeping",
+        "panic attacks",
+        "feeling down",
+        "irritability",
+        "headaches",
+        "stomach problems",
+        "refer to therapist",
+        "start medication",
+        "follow up in a few weeks",
+        "loss of appetite",
+        "weight loss",
+        "difficulty avoiding triggers"
+      ],
+      "model_facts": [
+        "panic attacks",
+        "racing heart",
+        "difficulty breathing",
+        "impending doom",
+        "insomnia",
+        "irritability",
+        "decreased motivation",
+        "weight loss",
+        "nausea",
+        "wanting to vomit",
+        "anxiety",
+        "ssri (e.g., sertraline)",
+        "start ssri",
+        "schedule therapy appointment",
+        "provide anxiety management techniques",
+        "schedule follow-up appointment",
+        "provide anxiety resources",
+        "discuss lifestyle modifications",
+        "frequent panic attacks",
+        "impacts daily life",
+        "differential diagnosis includes generalized anxiety disorder, panic disorder, social anxiety disorder, and substance-induced anxiety"
+      ],
+      "hallucinated_facts": [
+        "impending doom",
+        "frequent panic attacks",
+        "difficulty breathing",
+        "ssri (e.g., sertraline)",
+        "impacts daily life",
+        "provide anxiety resources",
+        "differential diagnosis includes generalized anxiety disorder, panic disorder, social anxiety disorder, and substance-induced anxiety",
+        "decreased motivation",
+        "wanting to vomit",
+        "discuss lifestyle modifications",
+        "racing heart",
+        "provide anxiety management techniques"
+      ],
+      "missing_facts": [
+        "feeling down",
+        "headaches",
+        "difficulty avoiding triggers",
+        "loss of appetite"
+      ],
+      "matched_transcript_facts": [
+        "start medication",
+        "follow up in a few weeks",
+        "stomach problems",
+        "difficulty sleeping",
+        "weight loss",
+        "panic attacks",
+        "anxiety",
+        "refer to therapist",
+        "irritability"
+      ]
+    }
+  },
+  {
+    "id": 6,
+    "health_problem": "Thyroid Disorders",
+    "hallucination_rate": 0.4615,
+    "coverage_rate": 0.5,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.473,
+      "reason": "High Hallucination",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|dangerous_omission",
+          "statement": "Model invented 'order chest CT'",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "CRITICAL",
+          "fix": "Remove unsupported test OR verify in EHR"
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Model missing 'recheck tsh and t4 levels'",
+          "risk_impact": "documentation_quality|treatment_delay",
+          "severity": "HIGH",
+          "fix": "Add missing lab orders to the model output"
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 14,
+      "model": 13
+    },
+    "details": {
+      "transcript_facts": [
+        "fatigue",
+        "muscle cramps",
+        "constipation",
+        "overdue colorectal cancer screening",
+        "levothyroxine 125 mcg",
+        "schedule follow-up appointment in two weeks",
+        "recheck tsh and t4 levels",
+        "coordinate insurance for colonoscopy",
+        "provide influenza vaccine information",
+        "fatigue persists",
+        "muscle cramps occur after sitting or lying down",
+        "constipation not related to medication",
+        "weight loss 10 pounds",
+        "increased hair shedding"
+      ],
+      "model_facts": [
+        "persistent fatigue",
+        "muscle cramps in legs",
+        "unintentional weight loss",
+        "increased hair shedding",
+        "constipation",
+        "hypothyroidism",
+        "levothyroxine",
+        "schedule follow-up appointment with endocrinologist dr. smith",
+        "increase levothyroxine dosage to 125 mcg",
+        "order comprehensive thyroid panel",
+        "investigate potential drug interactions",
+        "schedule colonoscopy for overdue colorectal cancer screening",
+        "provide information and schedule influenza vaccination"
+      ],
+      "hallucinated_facts": [
+        "schedule follow-up appointment with endocrinologist dr. smith",
+        "order comprehensive thyroid panel",
+        "unintentional weight loss",
+        "hypothyroidism",
+        "increase levothyroxine dosage to 125 mcg",
+        "investigate potential drug interactions"
+      ],
+      "missing_facts": [
+        "constipation not related to medication",
+        "fatigue persists",
+        "weight loss 10 pounds",
+        "coordinate insurance for colonoscopy",
+        "schedule follow-up appointment in two weeks",
+        "muscle cramps occur after sitting or lying down",
+        "recheck tsh and t4 levels"
+      ],
+      "matched_transcript_facts": [
+        "fatigue",
+        "provide influenza vaccine information",
+        "increased hair shedding",
+        "overdue colorectal cancer screening",
+        "constipation",
+        "muscle cramps",
+        "levothyroxine 125 mcg"
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "health_problem": "Respiratory Allergies",
+    "hallucination_rate": 0.3684,
+    "coverage_rate": 0.8,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.318,
+      "reason": "High Hallucination",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|unsupported_diagnosis|dangerous_omission|other",
+          "statement": "Model hallucinated 'copd', 'asthma', 'schedule follow-up appointment', 'educate patient on inhaler technique', 'post-bronchitis exacerbation', 'chest heaviness'",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Remove hallucinated findings and ensure all critical findings are present in the documentation."
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Missing 'run blood tests' and 'add medication for congestion'",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "HIGH",
+          "fix": "Clinician to verify and add missing elements to the documentation."
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 15,
+      "model": 19
+    },
+    "details": {
+      "transcript_facts": [
+        "persistent respiratory symptoms",
+        "cough",
+        "chest tightness",
+        "shortness of breath",
+        "wheezing",
+        "congestion",
+        "sinus congestion",
+        "albuterol inhaler as needed",
+        "fluticasone propionate nasal spray as needed",
+        "order chest x-ray",
+        "order ct scan",
+        "run blood tests",
+        "increase albuterol dosage",
+        "add medication for congestion",
+        "history of bronchitis a few years ago"
+      ],
+      "model_facts": [
+        "constant cough",
+        "chest tightness",
+        "shortness of breath",
+        "chest heaviness",
+        "nasal congestion",
+        "sinus pressure",
+        "respiratory distress",
+        "asthma",
+        "copd",
+        "post-bronchitis exacerbation",
+        "albuterol inhaler",
+        "fluticasone propionate nasal spray",
+        "order chest x-ray",
+        "order ct scan of the chest",
+        "increase albuterol dosage",
+        "prescribe fluticasone propionate",
+        "schedule follow-up appointment",
+        "educate patient on inhaler technique",
+        "history of bronchitis"
+      ],
+      "hallucinated_facts": [
+        "prescribe fluticasone propionate",
+        "copd",
+        "schedule follow-up appointment",
+        "educate patient on inhaler technique",
+        "post-bronchitis exacerbation",
+        "chest heaviness",
+        "asthma"
+      ],
+      "missing_facts": [
+        "run blood tests",
+        "add medication for congestion",
+        "cough"
+      ],
+      "matched_transcript_facts": [
+        "wheezing",
+        "chest tightness",
+        "shortness of breath",
+        "sinus congestion",
+        "fluticasone propionate nasal spray as needed",
+        "order ct scan",
+        "history of bronchitis a few years ago",
+        "persistent respiratory symptoms",
+        "albuterol inhaler as needed",
+        "congestion",
+        "increase albuterol dosage",
+        "order chest x-ray"
+      ]
+    }
+  },
+  {
+    "id": 8,
+    "health_problem": "Injuries",
+    "hallucination_rate": 0.3,
+    "coverage_rate": 0.875,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.247,
+      "reason": "Low Coverage",
+      "priority": "medium"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|unsupported_diagnosis|dangerous_omission|other",
+          "statement": "Model invented 'no numbness or tingling'",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Remove unsupported findings OR verify in EHR"
+        },
+        {
+          "category": "hallucinated_medication|missing_critical_finding|unsupported_diagnosis|dangerous_omission|other",
+          "statement": "Model invented 'advise patient to rest and elevate ankle'",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Remove unsupported advice OR verify in EHR"
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "PRODUCTION_OK|QA_REVIEW|RETRAIN_PROMPT|MODEL_ISSUE",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 8,
+      "model": 10
+    },
+    "details": {
+      "transcript_facts": [
+        "discomfort in right ankle",
+        "pain in right ankle",
+        "swelling in right ankle",
+        "order x-ray",
+        "schedule follow-up appointment in two days",
+        "pain exacerbated by weight-bearing",
+        "swelling after prolonged standing",
+        "ice packs provide some relief"
+      ],
+      "model_facts": [
+        "discomfort in right ankle",
+        "pain with weight-bearing and movement",
+        "swelling in right ankle",
+        "order x-ray of right ankle",
+        "schedule follow-up appointment",
+        "advise patient to rest and elevate ankle",
+        "recommend ice packs",
+        "consider over-the-counter pain medication",
+        "no numbness or tingling",
+        "swelling especially after prolonged weight-bearing"
+      ],
+      "hallucinated_facts": [
+        "consider over-the-counter pain medication",
+        "no numbness or tingling",
+        "advise patient to rest and elevate ankle"
+      ],
+      "missing_facts": [
+        "order x-ray"
+      ],
+      "matched_transcript_facts": [
+        "pain in right ankle",
+        "discomfort in right ankle",
+        "pain exacerbated by weight-bearing",
+        "swelling after prolonged standing",
+        "swelling in right ankle",
+        "ice packs provide some relief",
+        "schedule follow-up appointment in two days"
+      ]
+    }
+  },
+  {
+    "id": 9,
+    "health_problem": "Diabetes",
+    "hallucination_rate": 0.3158,
+    "coverage_rate": 0.7647,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.292,
+      "reason": "High Hallucination",
+      "priority": "medium"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|dangerous_omission",
+          "statement": "Model hallucinated 'uncontrolled diabetes', 'dizziness', 'educate patient on proper blood glucose monitoring techniques', 'higher-than-usual a1c result', 'patient reports peripheral neuropathy'.",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "CRITICAL",
+          "fix": "Remove hallucinated statements and ensure all relevant findings are present in the clinical note."
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Missing 'schedule blood test', 'check kidney function', 'order a1c', 'check blood lipids', 'schedule retinal exam', 'patient concerned about medication effectiveness'.",
+          "risk_impact": "documentation_quality|treatment_delay",
+          "severity": "HIGH",
+          "fix": "Ensure all requested tests and patient concerns are documented."
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 17,
+      "model": 19
+    },
+    "details": {
+      "transcript_facts": [
+        "unusual symptoms",
+        "increased thirst",
+        "increased urination",
+        "blurry vision",
+        "tingling feet",
+        "fatigue",
+        "elevated blood pressure",
+        "high a1c",
+        "schedule blood test",
+        "order a1c",
+        "check blood lipids",
+        "check kidney function",
+        "schedule retinal exam",
+        "follow-up appointment",
+        "review treatment plan",
+        "patient not checking blood sugar levels",
+        "patient concerned about medication effectiveness"
+      ],
+      "model_facts": [
+        "increased thirst",
+        "frequent urination",
+        "blurry vision",
+        "tingling sensations in feet",
+        "increased fatigue",
+        "dizziness",
+        "uncontrolled diabetes",
+        "order blood test to check a1c",
+        "blood lipids",
+        "kidney function",
+        "schedule retinal exam",
+        "review current medication regimen",
+        "educate patient on proper blood glucose monitoring techniques",
+        "schedule follow-up appointment for next week to review test results and discuss treatment plan",
+        "ensure vaccinations and cancer screenings are up to date",
+        "elevated blood pressure",
+        "patient reports inconsistent blood sugar monitoring",
+        "higher-than-usual a1c result",
+        "patient reports peripheral neuropathy"
+      ],
+      "hallucinated_facts": [
+        "uncontrolled diabetes",
+        "dizziness",
+        "educate patient on proper blood glucose monitoring techniques",
+        "higher-than-usual a1c result",
+        "ensure vaccinations and cancer screenings are up to date",
+        "patient reports peripheral neuropathy"
+      ],
+      "missing_facts": [
+        "order a1c",
+        "schedule retinal exam",
+        "unusual symptoms",
+        "patient concerned about medication effectiveness"
+      ],
+      "matched_transcript_facts": [
+        "fatigue",
+        "high a1c",
+        "check blood lipids",
+        "elevated blood pressure",
+        "patient not checking blood sugar levels",
+        "increased thirst",
+        "check kidney function",
+        "increased urination",
+        "blurry vision",
+        "follow-up appointment",
+        "review treatment plan",
+        "tingling feet",
+        "schedule blood test"
+      ]
+    }
+  },
+  {
+    "id": 10,
+    "health_problem": "Gastrointestinal Issues",
+    "hallucination_rate": 0.1429,
+    "coverage_rate": 0.75,
+    "triage": {
+      "needs_judge": false,
+      "risk_score": 0.175,
+      "reason": "Low Coverage",
+      "priority": "medium"
+    },
+    "judge_evaluation": null,
+    "fact_counts": {
+      "transcript": 16,
+      "model": 14
+    },
+    "details": {
+      "transcript_facts": [
+        "heartburn",
+        "abdominal pain",
+        "nausea",
+        "difficulty swallowing",
+        "regurgitation",
+        "fatigue",
+        "weight loss",
+        "omeprazole dosage twice a day",
+        "medication for nausea",
+        "order tests",
+        "schedule endoscopy",
+        "medication instructions",
+        "avoidance of spicy foods and citrus fruits doesn't help",
+        "nausea worse in the mornings",
+        "abdominal pain localized to upper right abdomen",
+        "regurgitation especially at night disrupts sleep"
+      ],
+      "model_facts": [
+        "heartburn",
+        "abdominal pain",
+        "nausea",
+        "difficulty swallowing",
+        "regurgitation",
+        "fatigue",
+        "unintentional weight loss",
+        "omeprazole dosage to twice daily",
+        "medication for nausea",
+        "schedule endoscopy",
+        "provide patient with detailed instructions regarding medication and dietary modifications",
+        "schedule follow-up appointment in one week",
+        "tenderness in the upper abdomen",
+        "patient appears uncomfortable and anxious"
+      ],
+      "hallucinated_facts": [
+        "schedule follow-up appointment in one week",
+        "patient appears uncomfortable and anxious"
+      ],
+      "missing_facts": [
+        "avoidance of spicy foods and citrus fruits doesn't help",
+        "regurgitation especially at night disrupts sleep",
+        "order tests",
+        "nausea worse in the mornings"
+      ],
+      "matched_transcript_facts": [
+        "medication instructions",
+        "fatigue",
+        "regurgitation",
+        "difficulty swallowing",
+        "schedule endoscopy",
+        "omeprazole dosage twice a day",
+        "nausea",
+        "abdominal pain localized to upper right abdomen",
+        "weight loss",
+        "medication for nausea",
+        "heartburn",
+        "abdominal pain"
+      ]
+    }
+  },
+  {
+    "id": 11,
+    "health_problem": "Sleep Disorders",
+    "hallucination_rate": 0.4286,
+    "coverage_rate": 0.5333,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.44,
+      "reason": "High Hallucination",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|unsupported_diagnosis|dangerous_omission|other",
+          "statement": "Model hallucinated 'review sleep hygiene practices', 'vital signs within normal limits', 'no acute distress noted', 'explore underlying anxiety or depression', 'daytime fatigue', 'schedule follow-up appointment in 2 weeks'",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Remove hallucinated statements and ensure all relevant findings are present in the note."
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Missing 'establish a consistent sleep schedule', 'recommend lifestyle changes', 'diagnosed with obstructive sleep apnea in 2016', 'avoid caffeine and alcohol in the evenings', 'headaches', 'try relaxation techniques'",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Add missing findings to the note."
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW|RETRAIN_PROMPT|MODEL_ISSUE",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 15,
+      "model": 14
+    },
+    "details": {
+      "transcript_facts": [
+        "tiredness",
+        "insomnia",
+        "difficulty falling asleep",
+        "waking up multiple times during the night",
+        "headaches",
+        "cpap machine",
+        "schedule sleep study",
+        "adjust cpap settings",
+        "follow up in a few days",
+        "recommend lifestyle changes",
+        "avoid caffeine and alcohol in the evenings",
+        "establish a consistent sleep schedule",
+        "try relaxation techniques",
+        "diagnosed with obstructive sleep apnea in 2016",
+        "cpap machine not working effectively"
+      ],
+      "model_facts": [
+        "difficulty falling asleep",
+        "frequent awakenings",
+        "daytime fatigue",
+        "chronic insomnia",
+        "obstructive sleep apnea",
+        "schedule follow-up appointment",
+        "conduct a comprehensive sleep study",
+        "review sleep hygiene practices",
+        "explore underlying anxiety or depression",
+        "provide education on cpap machine use",
+        "schedule follow-up appointment in 2 weeks",
+        "cpap machine limited improvement",
+        "vital signs within normal limits",
+        "no acute distress noted"
+      ],
+      "hallucinated_facts": [
+        "review sleep hygiene practices",
+        "vital signs within normal limits",
+        "no acute distress noted",
+        "explore underlying anxiety or depression",
+        "daytime fatigue",
+        "schedule follow-up appointment in 2 weeks"
+      ],
+      "missing_facts": [
+        "establish a consistent sleep schedule",
+        "recommend lifestyle changes",
+        "diagnosed with obstructive sleep apnea in 2016",
+        "avoid caffeine and alcohol in the evenings",
+        "headaches",
+        "try relaxation techniques",
+        "difficulty falling asleep"
+      ],
+      "matched_transcript_facts": [
+        "adjust cpap settings",
+        "cpap machine not working effectively",
+        "waking up multiple times during the night",
+        "cpap machine",
+        "tiredness",
+        "follow up in a few days",
+        "schedule sleep study",
+        "insomnia"
+      ]
+    }
+  },
+  {
+    "id": 12,
+    "health_problem": "Allergies",
+    "hallucination_rate": 0.4737,
+    "coverage_rate": 0.6667,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.432,
+      "reason": "High Hallucination",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|dangerous_omission",
+          "statement": "Model hallucinated 'allergy testing', 'pulmonary function testing', 'nasal saline rinses', 'patient education', 'schedule follow-up appointment'. Also missing 'order tests', 'cough worse at night', 'plan further management', 'discuss test results', 'dizziness when standing quickly'.",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Clinician must verify all test orders and management plans. Remove hallucinated items and ensure all critical findings are documented."
+        }
+      ],
+      "production_score": 0.1,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 15,
+      "model": 19
+    },
+    "details": {
+      "transcript_facts": [
+        "cough",
+        "low energy levels",
+        "nasal congestion",
+        "dizziness",
+        "over-the-counter antihistamine",
+        "penicillin",
+        "peanuts",
+        "dust mites",
+        "avoid known allergens",
+        "order tests",
+        "discuss test results",
+        "plan further management",
+        "cough worse at night",
+        "cough worse outdoors with pollen",
+        "dizziness when standing quickly"
+      ],
+      "model_facts": [
+        "dry cough",
+        "low energy levels",
+        "sneezing",
+        "runny nose",
+        "nasal congestion",
+        "dizziness",
+        "allergic rhinitis",
+        "penicillin",
+        "peanuts",
+        "dust mites",
+        "pollen",
+        "prescribe antihistamine",
+        "avoid allergens",
+        "nasal saline rinses",
+        "allergy testing",
+        "pulmonary function testing",
+        "patient education",
+        "schedule follow-up appointment",
+        "symptoms exacerbated by pollen and lying down"
+      ],
+      "hallucinated_facts": [
+        "nasal saline rinses",
+        "pulmonary function testing",
+        "allergic rhinitis",
+        "schedule follow-up appointment",
+        "nasal congestion",
+        "allergy testing",
+        "patient education",
+        "sneezing",
+        "symptoms exacerbated by pollen and lying down"
+      ],
+      "missing_facts": [
+        "order tests",
+        "cough worse at night",
+        "plan further management",
+        "dizziness when standing quickly",
+        "discuss test results"
+      ],
+      "matched_transcript_facts": [
+        "dust mites",
+        "over-the-counter antihistamine",
+        "cough worse outdoors with pollen",
+        "nasal congestion",
+        "low energy levels",
+        "penicillin",
+        "dizziness",
+        "avoid known allergens",
+        "peanuts",
+        "cough"
+      ]
+    }
+  },
+  {
+    "id": 13,
+    "health_problem": "Headaches",
+    "hallucination_rate": 0.3571,
+    "coverage_rate": 0.6429,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.357,
+      "reason": "High Hallucination",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|unsupported_diagnosis|dangerous_omission|other",
+          "statement": "Model hallucinated 'chronic headaches of unknown etiology', 'headaches occur multiple times per week', 'provide headache diary', 'initiate preventative medication'.",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Remove hallucinated statements OR verify in EHR"
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Missing 'ibuprofen', 'nurse to discuss medication', 'headaches feel like band tightening around head', 'sister has no headache history'.",
+          "risk_impact": "documentation_quality|treatment_delay",
+          "severity": "HIGH",
+          "fix": "Ensure all relevant facts are captured in the model output."
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 14,
+      "model": 14
+    },
+    "details": {
+      "transcript_facts": [
+        "persistent headaches",
+        "ibuprofen",
+        "omeprazole",
+        "medication to prevent headaches",
+        "order blood workup",
+        "order mri",
+        "schedule follow-up appointment",
+        "nurse to discuss medication",
+        "headaches started six months ago",
+        "headaches frequent",
+        "headaches throbbing on right side",
+        "headaches feel like band tightening around head",
+        "mother had headaches",
+        "sister has no headache history"
+      ],
+      "model_facts": [
+        "frequent headaches",
+        "headaches on right side",
+        "headaches described as tightening band sensation",
+        "chronic headaches of unknown etiology",
+        "omeprazole",
+        "order blood work",
+        "order mri of the brain",
+        "initiate preventative medication",
+        "schedule follow-up appointment",
+        "provide headache diary",
+        "educate patient on headache management strategies",
+        "headaches began approximately six months ago",
+        "headaches occur multiple times per week",
+        "family history of similar headaches"
+      ],
+      "hallucinated_facts": [
+        "educate patient on headache management strategies",
+        "initiate preventative medication",
+        "chronic headaches of unknown etiology",
+        "headaches occur multiple times per week",
+        "provide headache diary"
+      ],
+      "missing_facts": [
+        "ibuprofen",
+        "nurse to discuss medication",
+        "sister has no headache history",
+        "medication to prevent headaches",
+        "headaches feel like band tightening around head"
+      ],
+      "matched_transcript_facts": [
+        "order mri",
+        "omeprazole",
+        "persistent headaches",
+        "headaches frequent",
+        "schedule follow-up appointment",
+        "headaches started six months ago",
+        "mother had headaches",
+        "order blood workup",
+        "headaches throbbing on right side"
+      ]
+    }
+  },
+  {
+    "id": 14,
+    "health_problem": "Gastrointestinal Issues",
+    "hallucination_rate": 0.1364,
+    "coverage_rate": 0.8261,
+    "triage": {
+      "needs_judge": false,
+      "risk_score": 0.148,
+      "reason": "Low Coverage",
+      "priority": "medium"
+    },
+    "judge_evaluation": null,
+    "fact_counts": {
+      "transcript": 23,
+      "model": 22
+    },
+    "details": {
+      "transcript_facts": [
+        "abdominal pain",
+        "nausea",
+        "vomiting",
+        "diarrhea",
+        "constipation",
+        "bloating",
+        "gas",
+        "low-grade fever",
+        "gerd",
+        "ibs",
+        "ibd",
+        "omeprazole",
+        "ibsolution",
+        "order stool test",
+        "order colonoscopy",
+        "follow up in a few weeks",
+        "adjust treatment plan",
+        "family history of crohn's disease",
+        "family history of acid reflux",
+        "weight loss due to dietary restrictions",
+        "feeling full quickly after eating small amounts of food",
+        "blood in stool",
+        "watery stool"
+      ],
+      "model_facts": [
+        "abdominal pain in the lower left side of her abdomen",
+        "intermittent nausea and vomiting",
+        "irregular bowel movements",
+        "bloating",
+        "gas",
+        "low-grade fever",
+        "blood in her stool",
+        "watery stools",
+        "weight loss due to avoiding trigger foods",
+        "feeling full quickly after eating small amounts",
+        "exacerbated by spicy and fatty foods",
+        "stress worsens her condition",
+        "omeprazole",
+        "ibsolution",
+        "order stool test",
+        "schedule colonoscopy",
+        "maintain a food diary",
+        "schedule follow-up appointment in 2-4 weeks",
+        "family history of crohn's disease",
+        "family history of acid reflux",
+        "suspect irritable bowel syndrome (ibs)",
+        "suspect inflammatory bowel disease (ibd)"
+      ],
+      "hallucinated_facts": [
+        "stress worsens her condition",
+        "maintain a food diary",
+        "exacerbated by spicy and fatty foods"
+      ],
+      "missing_facts": [
+        "vomiting",
+        "constipation",
+        "gerd",
+        "adjust treatment plan"
+      ],
+      "matched_transcript_facts": [
+        "order stool test",
+        "ibsolution",
+        "watery stool",
+        "family history of crohn's disease",
+        "weight loss due to dietary restrictions",
+        "gas",
+        "omeprazole",
+        "ibs",
+        "follow up in a few weeks",
+        "ibd",
+        "feeling full quickly after eating small amounts of food",
+        "family history of acid reflux",
+        "blood in stool",
+        "bloating",
+        "nausea",
+        "order colonoscopy",
+        "low-grade fever",
+        "diarrhea",
+        "abdominal pain"
+      ]
+    }
+  },
+  {
+    "id": 15,
+    "health_problem": "Thyroid Disorders",
+    "hallucination_rate": 0.25,
+    "coverage_rate": 0.6667,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.275,
+      "reason": "Low Coverage",
+      "priority": "medium"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|dangerous_omission",
+          "statement": "Model hallucinated 'order chest CT', 'educate patient on signs and symptoms of hypothyroidism and the importance of medication adherence', 'review medication adherence and dosage of levothyroxine', 'sluggishness'",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "CRITICAL",
+          "fix": "Remove unsupported test OR verify in EHR"
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Missing 'constant fatigue', 'hair loss', 'adjust treatment plan', 'no significant improvement with medication', 'levothyroxine started in 2019'",
+          "risk_impact": "documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Clinician to verify and add missing information to the note."
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 18,
+      "model": 16
+    },
+    "details": {
+      "transcript_facts": [
+        "fatigue",
+        "weight gain",
+        "constant fatigue",
+        "hair loss",
+        "cold intolerance",
+        "changes in menstrual cycle",
+        "muscle weakness",
+        "leg cramps",
+        "joint pain",
+        "hashimoto's thyroiditis",
+        "levothyroxine",
+        "schedule thyroid ultrasound",
+        "monitor thyroid levels",
+        "adjust medication if necessary",
+        "reassess symptoms and thyroid levels in a few months",
+        "adjust treatment plan",
+        "levothyroxine started in 2019",
+        "no significant improvement with medication"
+      ],
+      "model_facts": [
+        "persistent fatigue",
+        "sluggishness",
+        "weight gain of 15 pounds",
+        "cold intolerance",
+        "heavier and more frequent menstrual cycles",
+        "muscle weakness",
+        "leg cramps",
+        "joint pain in hands and knees",
+        "hashimoto's thyroiditis",
+        "levothyroxine",
+        "schedule thyroid ultrasound",
+        "order thyroid function tests (tsh, free t4, free t3)",
+        "review medication adherence and dosage of levothyroxine",
+        "discuss lifestyle modifications including diet and exercise",
+        "schedule follow-up appointment in 6-8 weeks to reassess symptoms and adjust levothyroxine dosage as needed",
+        "educate patient on signs and symptoms of hypothyroidism and the importance of medication adherence"
+      ],
+      "hallucinated_facts": [
+        "discuss lifestyle modifications including diet and exercise",
+        "sluggishness",
+        "educate patient on signs and symptoms of hypothyroidism and the importance of medication adherence",
+        "review medication adherence and dosage of levothyroxine"
+      ],
+      "missing_facts": [
+        "constant fatigue",
+        "adjust medication if necessary",
+        "no significant improvement with medication",
+        "levothyroxine started in 2019",
+        "hair loss",
+        "adjust treatment plan"
+      ],
+      "matched_transcript_facts": [
+        "fatigue",
+        "cold intolerance",
+        "leg cramps",
+        "reassess symptoms and thyroid levels in a few months",
+        "levothyroxine",
+        "joint pain",
+        "hashimoto's thyroiditis",
+        "changes in menstrual cycle",
+        "weight gain",
+        "monitor thyroid levels",
+        "schedule thyroid ultrasound",
+        "muscle weakness"
+      ]
+    }
+  },
+  {
+    "id": 16,
+    "health_problem": "Respiratory Allergies",
+    "hallucination_rate": 0.2941,
+    "coverage_rate": 0.8,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.266,
+      "reason": "Low Coverage",
+      "priority": "medium"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|dangerous_omission",
+          "statement": "Model hallucinated 'educate patient on proper medication use', 'follow up in 2-4 weeks', 'medications no longer effective'",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "CRITICAL",
+          "fix": "Remove hallucinated statements and ensure clinician confirms instructions."
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Model missing 'discuss treatment plan'",
+          "risk_impact": "documentation_quality|treatment_delay",
+          "severity": "HIGH",
+          "fix": "Clinician must explicitly document the treatment plan."
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Model missing 'patient's family history is unremarkable'",
+          "risk_impact": "documentation_quality",
+          "severity": "MEDIUM",
+          "fix": "Clinician to document family history."
+        }
+      ],
+      "production_score": 0.3,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 15,
+      "model": 17
+    },
+    "details": {
+      "transcript_facts": [
+        "allergies",
+        "stuffy nose",
+        "sneezing",
+        "itchy eyes",
+        "watery eyes",
+        "tickle in throat",
+        "flonase",
+        "claritin",
+        "dust",
+        "pets",
+        "schedule mammogram",
+        "discuss treatment plan",
+        "allergies worsen in spring and fall",
+        "patient overdue for influenza and tdap vaccines",
+        "patient's family history is unremarkable"
+      ],
+      "model_facts": [
+        "nasal congestion",
+        "frequent sneezing",
+        "itchy, watery eyes",
+        "tickle in throat",
+        "allergic rhinitis",
+        "flonase",
+        "claritin",
+        "cetirizine",
+        "dust",
+        "pets",
+        "schedule mammogram",
+        "schedule influenza and tdap vaccinations",
+        "educate patient on proper medication use",
+        "follow up in 2-4 weeks",
+        "symptoms exacerbated by dust and pets",
+        "symptoms worsen during spring and fall",
+        "medications no longer effective"
+      ],
+      "hallucinated_facts": [
+        "symptoms exacerbated by dust and pets",
+        "cetirizine",
+        "medications no longer effective",
+        "educate patient on proper medication use",
+        "follow up in 2-4 weeks"
+      ],
+      "missing_facts": [
+        "discuss treatment plan",
+        "patient's family history is unremarkable",
+        "watery eyes"
+      ],
+      "matched_transcript_facts": [
+        "schedule mammogram",
+        "flonase",
+        "allergies",
+        "stuffy nose",
+        "tickle in throat",
+        "allergies worsen in spring and fall",
+        "itchy eyes",
+        "sneezing",
+        "pets",
+        "dust",
+        "patient overdue for influenza and tdap vaccines",
+        "claritin"
+      ]
+    }
+  },
+  {
+    "id": 17,
+    "health_problem": "Cancer Screenings",
+    "hallucination_rate": 0.3125,
+    "coverage_rate": 0.7857,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.283,
+      "reason": "High Hallucination",
+      "priority": "medium"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|unsupported_diagnosis|dangerous_omission|other",
+          "statement": "Model hallucinated 'provide patient education on osteoarthritis management and lifestyle modifications', 'schedule follow-up appointment in 2 weeks', 'increased appetite', 'continue current diabetes management plan', 'elevated hba1c indicates poor glycemic control', 'elevated blood pressure'",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Remove unsupported statements OR verify in EHR"
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Model missing 'schedule appointments', 'monitor diabetes', 'daughter concerned about memory'",
+          "risk_impact": "documentation_quality|treatment_delay",
+          "severity": "HIGH",
+          "fix": "Add missing information to the model output"
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 14,
+      "model": 16
+    },
+    "details": {
+      "transcript_facts": [
+        "joint pain",
+        "fatigue",
+        "high hba1c",
+        "elevated blood pressure",
+        "memory concerns",
+        "trouble sleeping",
+        "osteoarthritis",
+        "refer to physical therapy",
+        "schedule cognitive assessment",
+        "monitor diabetes",
+        "monitor hypertension",
+        "schedule appointments",
+        "mild degenerative changes in joints",
+        "daughter concerned about memory"
+      ],
+      "model_facts": [
+        "increased fatigue",
+        "joint pain in knees and hips",
+        "decline in memory",
+        "increased appetite",
+        "difficulty with sleep",
+        "elevated hba1c",
+        "elevated blood pressure",
+        "degenerative changes consistent with osteoarthritis",
+        "refer to physical therapy",
+        "schedule cognitive assessment",
+        "continue current diabetes management plan",
+        "schedule follow-up appointment in 2 weeks",
+        "provide patient education on osteoarthritis management and lifestyle modifications",
+        "degenerative changes consistent with osteoarthritis",
+        "elevated hba1c indicates poor glycemic control",
+        "elevated blood pressure"
+      ],
+      "hallucinated_facts": [
+        "provide patient education on osteoarthritis management and lifestyle modifications",
+        "schedule follow-up appointment in 2 weeks",
+        "increased appetite",
+        "continue current diabetes management plan",
+        "elevated hba1c indicates poor glycemic control"
+      ],
+      "missing_facts": [
+        "schedule appointments",
+        "monitor diabetes",
+        "daughter concerned about memory"
+      ],
+      "matched_transcript_facts": [
+        "fatigue",
+        "elevated blood pressure",
+        "mild degenerative changes in joints",
+        "osteoarthritis",
+        "joint pain",
+        "monitor hypertension",
+        "high hba1c",
+        "refer to physical therapy",
+        "trouble sleeping",
+        "memory concerns",
+        "schedule cognitive assessment"
+      ]
+    }
+  },
+  {
+    "id": 18,
+    "health_problem": "Skin Disorders",
+    "hallucination_rate": 0.6667,
+    "coverage_rate": 0.5,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.617,
+      "reason": "High Hallucination",
+      "priority": "critical"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|unsupported_diagnosis|dangerous_omission|other",
+          "statement": "Model hallucinated 'likely atopic dermatitis (eczema)', 'recommend fragrance-free moisturizer', 'advise patient to avoid potential irritants and allergens', 'educate patient on stress management techniques', 'consider referral to dermatology for patch testing', 'patient denies history of eczema or psoriasis', 'occasional acne breakouts in youth'",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Remove hallucinated diagnosis and unsupported recommendations. Ensure all findings are present in the clinical note."
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Missing 'itchy skin', 'flaky skin', 'skin discomfort', 'skin issues on elbows and knees', 'small scales on arms and legs'",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "CRITICAL",
+          "fix": "Add missing descriptive elements to the clinical note."
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 8,
+      "model": 12
+    },
+    "details": {
+      "transcript_facts": [
+        "itchy skin",
+        "flaky skin",
+        "skin discomfort",
+        "schedule follow-up appointment with dermatologist",
+        "skin issues on elbows and knees",
+        "skin patches are redder than usual",
+        "small scales on arms and legs",
+        "stress may be a trigger"
+      ],
+      "model_facts": [
+        "itchy and flaky skin",
+        "red patches",
+        "small scales",
+        "uncomfortable due to persistent itching",
+        "likely atopic dermatitis (eczema)",
+        "schedule follow-up appointment with dr. kraus",
+        "recommend fragrance-free moisturizer",
+        "advise patient to avoid potential irritants and allergens",
+        "educate patient on stress management techniques",
+        "consider referral to dermatology for patch testing",
+        "patient denies history of eczema or psoriasis",
+        "occasional acne breakouts in youth"
+      ],
+      "hallucinated_facts": [
+        "small scales",
+        "likely atopic dermatitis (eczema)",
+        "advise patient to avoid potential irritants and allergens",
+        "consider referral to dermatology for patch testing",
+        "educate patient on stress management techniques",
+        "occasional acne breakouts in youth",
+        "recommend fragrance-free moisturizer",
+        "patient denies history of eczema or psoriasis"
+      ],
+      "missing_facts": [
+        "stress may be a trigger",
+        "flaky skin",
+        "small scales on arms and legs",
+        "skin issues on elbows and knees"
+      ],
+      "matched_transcript_facts": [
+        "skin discomfort",
+        "skin patches are redder than usual",
+        "itchy skin",
+        "schedule follow-up appointment with dermatologist"
+      ]
+    }
+  },
+  {
+    "id": 19,
+    "health_problem": "Skin Disorders",
+    "hallucination_rate": 0.5385,
+    "coverage_rate": 0.6667,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.477,
+      "reason": "High Hallucination",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|dangerous_omission",
+          "statement": "Model hallucinated 'psoriasis', 'cream prescribed by dr. johnson', 'prescribe topical corticosteroid', 'prescribe fragrance-free moisturizer', 'educate patient on environmental triggers'",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "CRITICAL",
+          "fix": "Remove unsupported diagnosis/medication/treatment suggestions and verify in EHR"
+        },
+        {
+          "category": "missing_critical_finding|dangerous_omission",
+          "statement": "Model missed 'patient switched jobs', 'new moisturizer causing irritation', 'patient using moisturizer everywhere'",
+          "risk_impact": "documentation_quality|patient_safety",
+          "severity": "HIGH",
+          "fix": "Add missing information to the note"
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 9,
+      "model": 13
+    },
+    "details": {
+      "transcript_facts": [
+        "dry skin",
+        "flaking on elbows and knees",
+        "redness and irritation on lower back",
+        "topical corticosteroid",
+        "switch to different moisturizer",
+        "schedule follow-up appointment with dr. johnson",
+        "patient switched jobs",
+        "new moisturizer causing irritation",
+        "patient using moisturizer everywhere"
+      ],
+      "model_facts": [
+        "dry skin",
+        "flaking on elbows and knees",
+        "redness and irritation on lower back",
+        "psoriasis",
+        "cream prescribed by dr. johnson",
+        "topical corticosteroid",
+        "discontinue new moisturizer",
+        "prescribe fragrance-free moisturizer",
+        "prescribe topical corticosteroid",
+        "schedule follow-up appointment",
+        "educate patient on environmental triggers",
+        "patient is alert and oriented",
+        "patient appears comfortable"
+      ],
+      "hallucinated_facts": [
+        "patient is alert and oriented",
+        "prescribe topical corticosteroid",
+        "cream prescribed by dr. johnson",
+        "prescribe fragrance-free moisturizer",
+        "educate patient on environmental triggers",
+        "psoriasis",
+        "patient appears comfortable"
+      ],
+      "missing_facts": [
+        "patient switched jobs",
+        "patient using moisturizer everywhere",
+        "new moisturizer causing irritation"
+      ],
+      "matched_transcript_facts": [
+        "redness and irritation on lower back",
+        "flaking on elbows and knees",
+        "switch to different moisturizer",
+        "schedule follow-up appointment with dr. johnson",
+        "topical corticosteroid",
+        "dry skin"
+      ]
+    }
+  },
+  {
+    "id": 20,
+    "health_problem": "Joint Pain",
+    "hallucination_rate": 0.4286,
+    "coverage_rate": 0.6667,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.4,
+      "reason": "High Hallucination",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|dangerous_omission",
+          "statement": "Model hallucinated 'tenderness to palpation on left ankle', 'ankle instability', 'tenderness to palpation on right knee', 'swelling in right knee', 'decreased range of motion in left ankle'",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "CRITICAL",
+          "fix": "Remove hallucinated findings and ensure all relevant physical exam findings are present."
+        },
+        {
+          "category": "missing_critical_finding|dangerous_omission",
+          "statement": "Model missing 'joint pain for 2 weeks', 'osteoarthritis in right knee', 'sprain in left ankle', 'pain worsens with cold weather and prolonged sitting', 'pain improves with rest and heat', 'weakness in right quadriceps and left calf muscles', 'knees feel unstable', 'pain is worse in the mornings'",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "CRITICAL",
+          "fix": "Ensure all patient reported symptoms and key physical exam findings are documented."
+        }
+      ],
+      "production_score": 0.1,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 12,
+      "model": 14
+    },
+    "details": {
+      "transcript_facts": [
+        "joint pain for 2 weeks",
+        "osteoarthritis in right knee",
+        "sprain in left ankle",
+        "ibuprofen",
+        "refer to orthopedic specialist",
+        "schedule follow-up appointment in 4 weeks",
+        "prescribe physical therapy exercises",
+        "pain worsens with cold weather and prolonged sitting",
+        "pain improves with rest and heat",
+        "weakness in right quadriceps and left calf muscles",
+        "knees feel unstable",
+        "pain is worse in the mornings"
+      ],
+      "model_facts": [
+        "joint pain in right knee",
+        "joint pain in left ankle",
+        "decreased range of motion in right knee",
+        "decreased range of motion in left ankle",
+        "knee instability",
+        "ankle instability",
+        "over-the-counter ibuprofen as needed",
+        "refer to orthopedic specialist",
+        "physical therapy exercises",
+        "schedule follow-up appointment in four weeks",
+        "advise patient on proper footwear and activity modification",
+        "swelling in right knee",
+        "tenderness to palpation on right knee",
+        "tenderness to palpation on left ankle"
+      ],
+      "hallucinated_facts": [
+        "tenderness to palpation on left ankle",
+        "ankle instability",
+        "tenderness to palpation on right knee",
+        "swelling in right knee",
+        "decreased range of motion in left ankle",
+        "advise patient on proper footwear and activity modification"
+      ],
+      "missing_facts": [
+        "joint pain for 2 weeks",
+        "pain is worse in the mornings",
+        "pain worsens with cold weather and prolonged sitting",
+        "pain improves with rest and heat"
+      ],
+      "matched_transcript_facts": [
+        "schedule follow-up appointment in 4 weeks",
+        "knees feel unstable",
+        "ibuprofen",
+        "refer to orthopedic specialist",
+        "weakness in right quadriceps and left calf muscles",
+        "sprain in left ankle",
+        "osteoarthritis in right knee",
+        "prescribe physical therapy exercises"
+      ]
+    }
+  },
+  {
+    "id": 21,
+    "health_problem": "Ear Infections",
+    "hallucination_rate": 0.3846,
+    "coverage_rate": 0.5714,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.398,
+      "reason": "High Hallucination",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|dangerous_omission",
+          "statement": "Model hallucinated 'order otoscopic examination', 'acute otitis externa (swimmer\u2019s ear)', 'redness/swelling in right ear', 'provide patient education on proper ear hygiene', 'differential diagnosis includes bacterial, viral, and fungal otitis externa'. Missing: 'avoid water in right ear', 'ear discharge', 'fever 100.4', 'inflamed tympanic membrane', 'discharge present', 'take antibiotics'",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "CRITICAL",
+          "fix": "Review and correct hallucinated elements. Ensure all critical findings are present in the generated note."
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 14,
+      "model": 13
+    },
+    "details": {
+      "transcript_facts": [
+        "ear pain",
+        "hearing loss",
+        "dizziness",
+        "ear infection",
+        "ear discharge",
+        "fever",
+        "augmentin 500mg twice daily for ten days",
+        "ibuprofen 400mg every six hours as needed",
+        "schedule follow-up appointment in a week",
+        "take antibiotics",
+        "avoid water in right ear",
+        "inflamed tympanic membrane",
+        "discharge present",
+        "fever 100.4"
+      ],
+      "model_facts": [
+        "dull, achy pain in right ear",
+        "hearing loss",
+        "dizziness",
+        "low-grade fever of 100.4\u00b0f",
+        "ear discharge",
+        "redness/swelling in right ear",
+        "augmentin 500mg twice daily for 10 days",
+        "ibuprofen 400mg every 6 hours as needed",
+        "order otoscopic examination",
+        "schedule follow-up appointment in 7 days",
+        "provide patient education on proper ear hygiene",
+        "acute otitis externa (swimmer's ear)",
+        "differential diagnosis includes bacterial, viral, and fungal otitis externa"
+      ],
+      "hallucinated_facts": [
+        "order otoscopic examination",
+        "acute otitis externa (swimmer's ear)",
+        "redness/swelling in right ear",
+        "provide patient education on proper ear hygiene",
+        "differential diagnosis includes bacterial, viral, and fungal otitis externa"
+      ],
+      "missing_facts": [
+        "avoid water in right ear",
+        "ear discharge",
+        "fever 100.4",
+        "inflamed tympanic membrane",
+        "discharge present",
+        "take antibiotics"
+      ],
+      "matched_transcript_facts": [
+        "fever",
+        "ibuprofen 400mg every six hours as needed",
+        "ear pain",
+        "ear infection",
+        "dizziness",
+        "augmentin 500mg twice daily for ten days",
+        "schedule follow-up appointment in a week",
+        "hearing loss"
+      ]
+    }
+  },
+  {
+    "id": 22,
+    "health_problem": "Diabetes",
+    "hallucination_rate": 0.2857,
+    "coverage_rate": 0.625,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.312,
+      "reason": "Low Coverage",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|dangerous_omission",
+          "statement": "Model hallucinated 'order cmp' and 'potentially nephrotic syndrome' and 'provide patient education on diabetes management'.",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "CRITICAL",
+          "fix": "Remove hallucinated statements and ensure all critical findings are present."
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Model missing 'high cholesterol', 'lost 10 pounds in past month', 'cough is dry', 'difficulty with lifestyle modifications', 'log food and activity', 'shortness of breath when lying down'.",
+          "risk_impact": "documentation_quality|treatment_delay",
+          "severity": "HIGH",
+          "fix": "Ensure all patient reported symptoms and vital signs are documented."
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 16,
+      "model": 14
+    },
+    "details": {
+      "transcript_facts": [
+        "persistent cough",
+        "low energy levels",
+        "swelling in feet and ankles",
+        "diabetes not well-controlled",
+        "high cholesterol",
+        "metformin",
+        "atorvastatin",
+        "schedule follow-up appointment",
+        "order urinalysis",
+        "order 24-hour urine protein collection",
+        "refer to nephrologist (if needed)",
+        "log food and activity",
+        "cough is dry",
+        "lost 10 pounds in past month",
+        "difficulty with lifestyle modifications",
+        "shortness of breath when lying down"
+      ],
+      "model_facts": [
+        "persistent dry cough",
+        "low energy",
+        "swelling in feet and ankles",
+        "poorly controlled diabetes",
+        "edema",
+        "potentially nephrotic syndrome",
+        "metformin",
+        "atorvastatin",
+        "order urinalysis",
+        "24-hour urine protein collection",
+        "order cmp",
+        "schedule follow-up appointment in two weeks",
+        "provide patient education on diabetes management",
+        "consider referral to nephrology"
+      ],
+      "hallucinated_facts": [
+        "order cmp",
+        "potentially nephrotic syndrome",
+        "provide patient education on diabetes management",
+        "edema"
+      ],
+      "missing_facts": [
+        "shortness of breath when lying down",
+        "high cholesterol",
+        "lost 10 pounds in past month",
+        "log food and activity",
+        "cough is dry",
+        "difficulty with lifestyle modifications"
+      ],
+      "matched_transcript_facts": [
+        "diabetes not well-controlled",
+        "persistent cough",
+        "metformin",
+        "order 24-hour urine protein collection",
+        "order urinalysis",
+        "swelling in feet and ankles",
+        "schedule follow-up appointment",
+        "low energy levels",
+        "refer to nephrologist (if needed)",
+        "atorvastatin"
+      ]
+    }
+  },
+  {
+    "id": 23,
+    "health_problem": "High Blood Pressure",
+    "hallucination_rate": 0.2727,
+    "coverage_rate": 0.6957,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.282,
+      "reason": "Low Coverage",
+      "priority": "medium"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|unsupported_diagnosis|dangerous_omission|other",
+          "statement": "Model hallucinated 'referral to cardiology', 'blood pressure monitoring', 'ekg', 'lifestyle modifications', 'order comprehensive blood work'",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Remove unsupported test OR verify in EHR"
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Model missed 'chest pain', 'order tests', 'weight gain', 'weak urine stream', 'plugged ears', 'muscle pain'",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Clinician to verify and add missing information to the EHR."
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW|RETRAIN_PROMPT|MODEL_ISSUE",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 23,
+      "model": 22
+    },
+    "details": {
+      "transcript_facts": [
+        "constant fatigue",
+        "leg swelling",
+        "high blood pressure",
+        "shortness of breath",
+        "chest pain",
+        "dizziness",
+        "lightheadedness",
+        "constipation",
+        "dark urine",
+        "weak urine stream",
+        "muscle weakness",
+        "joint pain",
+        "insomnia",
+        "depression",
+        "memory problems",
+        "weight gain",
+        "dry itchy skin",
+        "muscle pain",
+        "joint pain",
+        "gritty dry eyes",
+        "plugged ears",
+        "order tests",
+        "schedule follow-up appointment"
+      ],
+      "model_facts": [
+        "constant fatigue",
+        "leg swelling",
+        "elevated blood pressure",
+        "shortness of breath with chest pain",
+        "dizziness",
+        "lightheadedness",
+        "gritty, dry eyes",
+        "constipation",
+        "dark-colored urine with an ammonia odor and occasional blood",
+        "insomnia",
+        "mood changes (feeling down)",
+        "cognitive difficulties (brain fog)",
+        "muscle aches",
+        "joint pain",
+        "dry skin",
+        "order comprehensive blood work",
+        "ekg",
+        "schedule follow-up appointment in 7 days",
+        "blood pressure monitoring",
+        "lifestyle modifications",
+        "referral to cardiology",
+        "referral to nephrology"
+      ],
+      "hallucinated_facts": [
+        "referral to nephrology",
+        "referral to cardiology",
+        "blood pressure monitoring",
+        "ekg",
+        "lifestyle modifications",
+        "order comprehensive blood work"
+      ],
+      "missing_facts": [
+        "chest pain",
+        "order tests",
+        "weight gain",
+        "weak urine stream",
+        "plugged ears",
+        "muscle pain"
+      ],
+      "matched_transcript_facts": [
+        "constant fatigue",
+        "shortness of breath",
+        "dry itchy skin",
+        "lightheadedness",
+        "dark urine",
+        "joint pain",
+        "schedule follow-up appointment",
+        "depression",
+        "gritty dry eyes",
+        "dizziness",
+        "constipation",
+        "high blood pressure",
+        "memory problems",
+        "insomnia",
+        "muscle weakness",
+        "leg swelling"
+      ]
+    }
+  },
+  {
+    "id": 24,
+    "health_problem": "Respiratory Allergies",
+    "hallucination_rate": 0.2273,
+    "coverage_rate": 0.85,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.204,
+      "reason": "Low Coverage",
+      "priority": "medium"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|dangerous_omission",
+          "statement": "Model hallucinated 'fatigue', 'educate on inhaler technique', 'moderate respiratory allergies', 'antihistamine', 'medication adherence'",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "CRITICAL",
+          "fix": "Remove hallucinated statements and ensure all relevant findings are documented."
+        },
+        {
+          "category": "missing_critical_finding|dangerous_omission",
+          "statement": "Model missed 'headaches', 'wear mask'",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "HIGH",
+          "fix": "Add missing findings to the note."
+        }
+      ],
+      "production_score": 0.3,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 20,
+      "model": 22
+    },
+    "details": {
+      "transcript_facts": [
+        "nasal congestion",
+        "sneezing",
+        "shortness of breath",
+        "sinus pressure",
+        "headaches",
+        "throat tightening",
+        "seasonal allergies",
+        "montelukast",
+        "fluticasone propionate inhaler",
+        "dust",
+        "pollen",
+        "mold",
+        "cats",
+        "dogs",
+        "refer to ear, nose, and throat specialist",
+        "schedule follow-up appointment",
+        "avoid triggers",
+        "wear mask",
+        "seasonal allergies",
+        "mother has respiratory allergies and asthma"
+      ],
+      "model_facts": [
+        "respiratory allergies",
+        "nasal congestion",
+        "sneezing",
+        "shortness of breath",
+        "fatigue",
+        "sinus pressure",
+        "throat tightness",
+        "montelukast",
+        "fluticasone propionate inhaler",
+        "antihistamine",
+        "dust",
+        "pollen",
+        "mold",
+        "cats",
+        "dogs",
+        "refer to ent specialist",
+        "minimize exposure to triggers",
+        "schedule follow-up appointment in 4 weeks",
+        "educate on inhaler technique",
+        "medication adherence",
+        "family history of respiratory allergies and asthma",
+        "moderate respiratory allergies"
+      ],
+      "hallucinated_facts": [
+        "fatigue",
+        "educate on inhaler technique",
+        "moderate respiratory allergies",
+        "antihistamine",
+        "medication adherence"
+      ],
+      "missing_facts": [
+        "headaches",
+        "wear mask"
+      ],
+      "matched_transcript_facts": [
+        "shortness of breath",
+        "refer to ear, nose, and throat specialist",
+        "throat tightening",
+        "dogs",
+        "nasal congestion",
+        "cats",
+        "schedule follow-up appointment",
+        "sinus pressure",
+        "avoid triggers",
+        "fluticasone propionate inhaler",
+        "sneezing",
+        "seasonal allergies",
+        "montelukast",
+        "mother has respiratory allergies and asthma",
+        "dust",
+        "pollen",
+        "mold"
+      ]
+    }
+  },
+  {
+    "id": 25,
+    "health_problem": "Sexual Health",
+    "hallucination_rate": 0.5294,
+    "coverage_rate": 0.7273,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.452,
+      "reason": "High Hallucination",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|unsupported_diagnosis|dangerous_omission|other",
+          "statement": "Model hallucinated 'increased urinary frequency', 'history of hernia repair', 'schedule follow-up appointment', 'medication side effects', 'depression', 'provide patient education', 'history of tonsil removal', 'discuss lifestyle modifications', 'detailed sexual history'",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Remove hallucinated statements and ensure all relevant findings are documented."
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Missing 'discuss treatment options (testosterone replacement therapy, medications)', 'trouble starting to urinate', 'address underlying issues (obesity, sleep apnea, depression)'",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Clinician must explicitly document these missing elements."
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 11,
+      "model": 17
+    },
+    "details": {
+      "transcript_facts": [
+        "difficulty achieving erection",
+        "decreased libido",
+        "decreased sensation",
+        "trouble starting to urinate",
+        "weak legs",
+        "fatigue",
+        "run blood work",
+        "keep symptom journal",
+        "discuss treatment options (testosterone replacement therapy, medications)",
+        "address underlying issues (obesity, sleep apnea, depression)",
+        "possible low testosterone"
+      ],
+      "model_facts": [
+        "difficulty achieving and maintaining an erection",
+        "decreased libido",
+        "diminished sexual sensation",
+        "increased urinary frequency",
+        "fatigue",
+        "weakness in legs",
+        "hypogonadism",
+        "depression",
+        "medication side effects",
+        "order blood tests",
+        "detailed sexual history",
+        "discuss lifestyle modifications",
+        "schedule follow-up appointment",
+        "provide patient education",
+        "maintain symptom journal",
+        "history of tonsil removal",
+        "history of hernia repair"
+      ],
+      "hallucinated_facts": [
+        "increased urinary frequency",
+        "history of hernia repair",
+        "schedule follow-up appointment",
+        "medication side effects",
+        "depression",
+        "provide patient education",
+        "history of tonsil removal",
+        "discuss lifestyle modifications",
+        "detailed sexual history"
+      ],
+      "missing_facts": [
+        "discuss treatment options (testosterone replacement therapy, medications)",
+        "trouble starting to urinate",
+        "address underlying issues (obesity, sleep apnea, depression)"
+      ],
+      "matched_transcript_facts": [
+        "fatigue",
+        "decreased libido",
+        "weak legs",
+        "run blood work",
+        "difficulty achieving erection",
+        "decreased sensation",
+        "possible low testosterone",
+        "keep symptom journal"
+      ]
+    }
+  },
+  {
+    "id": 26,
+    "health_problem": "Flu (Influenza)",
+    "hallucination_rate": 0.4762,
+    "coverage_rate": 0.5789,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.46,
+      "reason": "High Hallucination",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|unsupported_diagnosis|dangerous_omission|other",
+          "statement": "Model hallucinated 'order influenza testing (nasal swab)', 'prescribe bronchodilator (albuterol) via nebulizer', 'continue current asthma medications', 'albuterol via nebulizer', 'educate patient on proper inhaler technique', 'schedule follow-up appointment in 48-72 hours', 'schedule mammogram for next month'",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Remove unsupported test OR verify in EHR"
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Missing 'asthma symptoms worse', 'wheezing', 'thyroid levels monitored', 'thyroid medication every morning', 'follow up on mammogram results', 'overdue for influenza vaccine', 'exposure to viral infections'",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "CRITICAL",
+          "fix": "Clinician to verify and add missing information to the note"
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 19,
+      "model": 21
+    },
+    "details": {
+      "transcript_facts": [
+        "persistent cough",
+        "chest tightness",
+        "shortness of breath",
+        "wheezing",
+        "fatigue",
+        "low-grade fever",
+        "asthma",
+        "inhaler regularly",
+        "thyroid medication every morning",
+        "schedule mammogram",
+        "follow up on mammogram results",
+        "exposure to allergens",
+        "exposure to viral infections",
+        "overdue for influenza vaccine",
+        "asthma symptoms worse",
+        "peak flow meter readings lower than usual",
+        "fatigue manageable",
+        "thyroid levels monitored",
+        "medication adjusted as needed"
+      ],
+      "model_facts": [
+        "persistent cough",
+        "chest tightness",
+        "fatigue",
+        "low-grade fever",
+        "airway constriction",
+        "bronchospasm",
+        "possible influenza infection",
+        "asthma exacerbation",
+        "possible allergic reaction",
+        "rescue inhaler",
+        "maintenance medication",
+        "albuterol via nebulizer",
+        "order influenza testing (nasal swab)",
+        "prescribe bronchodilator (albuterol) via nebulizer",
+        "continue current asthma medications",
+        "educate patient on proper inhaler technique",
+        "schedule follow-up appointment in 48-72 hours",
+        "schedule mammogram for next month",
+        "lower peak flow meter readings",
+        "increased inhaler use",
+        "gail appears fatigued during the appointment"
+      ],
+      "hallucinated_facts": [
+        "possible influenza infection",
+        "increased inhaler use",
+        "bronchospasm",
+        "gail appears fatigued during the appointment",
+        "order influenza testing (nasal swab)",
+        "continue current asthma medications",
+        "albuterol via nebulizer",
+        "prescribe bronchodilator (albuterol) via nebulizer",
+        "schedule follow-up appointment in 48-72 hours",
+        "educate patient on proper inhaler technique"
+      ],
+      "missing_facts": [
+        "asthma symptoms worse",
+        "wheezing",
+        "thyroid levels monitored",
+        "fatigue manageable",
+        "thyroid medication every morning",
+        "follow up on mammogram results",
+        "overdue for influenza vaccine",
+        "exposure to viral infections"
+      ],
+      "matched_transcript_facts": [
+        "chest tightness",
+        "shortness of breath",
+        "persistent cough",
+        "fatigue",
+        "schedule mammogram",
+        "peak flow meter readings lower than usual",
+        "medication adjusted as needed",
+        "exposure to allergens",
+        "low-grade fever",
+        "inhaler regularly",
+        "asthma"
+      ]
+    }
+  },
+  {
+    "id": 27,
+    "health_problem": "Ear Infections",
+    "hallucination_rate": 0.5385,
+    "coverage_rate": 0.375,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.564,
+      "reason": "High Hallucination",
+      "priority": "critical"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|unsupported_diagnosis|dangerous_omission|other",
+          "statement": "Model hallucinated 'order otoscopic examination', 'order ear swab', 'reinforce patient education', 'small amount of discharge', 'no acute distress', 'prescribe otic drops', 'normal vital signs'. These were not present in the transcript facts.",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Remove hallucinated statements OR verify in EHR"
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 16,
+      "model": 13
+    },
+    "details": {
+      "transcript_facts": [
+        "ear discomfort",
+        "trouble hearing",
+        "earwax",
+        "itchy ear",
+        "hearing loss",
+        "hypertension",
+        "diabetes",
+        "order tests",
+        "schedule follow-up appointment",
+        "review test results",
+        "adjust medications",
+        "recommend lifestyle modifications",
+        "earwax or something stuck in there",
+        "itchy ear",
+        "hearing loss over the past few years",
+        "background noise affects hearing"
+      ],
+      "model_facts": [
+        "ear discomfort",
+        "hearing loss",
+        "hypertension",
+        "diabetes",
+        "prescribe otic drops",
+        "order otoscopic examination",
+        "order ear swab",
+        "schedule follow-up appointment",
+        "reinforce patient education",
+        "small amount of discharge",
+        "hearing loss in noisy environments",
+        "no acute distress",
+        "normal vital signs"
+      ],
+      "hallucinated_facts": [
+        "order otoscopic examination",
+        "order ear swab",
+        "reinforce patient education",
+        "small amount of discharge",
+        "no acute distress",
+        "prescribe otic drops",
+        "normal vital signs"
+      ],
+      "missing_facts": [
+        "earwax",
+        "review test results",
+        "order tests",
+        "adjust medications",
+        "background noise affects hearing",
+        "hearing loss over the past few years",
+        "earwax or something stuck in there",
+        "itchy ear",
+        "recommend lifestyle modifications"
+      ],
+      "matched_transcript_facts": [
+        "diabetes",
+        "hypertension",
+        "schedule follow-up appointment",
+        "trouble hearing",
+        "hearing loss",
+        "ear discomfort"
+      ]
+    }
+  },
+  {
+    "id": 28,
+    "health_problem": "Diabetes",
+    "hallucination_rate": 0.3333,
+    "coverage_rate": 0.5882,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.357,
+      "reason": "High Hallucination",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|dangerous_omission",
+          "statement": "Model hallucinated 'provide patient with education', 'refer to a mental health professional', 'patient appears anxious'. Also missing 'check thyroid function', 'check electrolyte levels', 'check kidney function', 'shortness of breath', 'urge to urinate', 'feeling faint'.",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "CRITICAL",
+          "fix": "Clinician review and correction of missing findings. Remove hallucinated statements."
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 17,
+      "model": 15
+    },
+    "details": {
+      "transcript_facts": [
+        "trouble sleeping",
+        "increased tiredness",
+        "dizziness when standing up quickly",
+        "shortness of breath",
+        "increased urination frequency",
+        "urge to urinate",
+        "lower back pain",
+        "joint pain in hands and feet",
+        "constipation",
+        "anxiety",
+        "feeling faint",
+        "order blood tests",
+        "check thyroid function",
+        "check electrolyte levels",
+        "check kidney function",
+        "refer to cardiologist",
+        "schedule follow-up appointment"
+      ],
+      "model_facts": [
+        "increased tiredness",
+        "frequent urination (especially at night)",
+        "urgency",
+        "constipation",
+        "lower back pain",
+        "joint pain in hands and feet",
+        "feelings of anxiety",
+        "occasional dizziness",
+        "order comprehensive blood work",
+        "schedule appointment with a cardiologist",
+        "schedule follow-up appointment",
+        "provide patient with education",
+        "refer to a mental health professional",
+        "patient appears anxious",
+        "combination of frequent urination, constipation, and joint pain raises concern for metabolic disorders"
+      ],
+      "hallucinated_facts": [
+        "patient appears anxious",
+        "urgency",
+        "refer to a mental health professional",
+        "provide patient with education",
+        "combination of frequent urination, constipation, and joint pain raises concern for metabolic disorders"
+      ],
+      "missing_facts": [
+        "feeling faint",
+        "shortness of breath",
+        "check kidney function",
+        "urge to urinate",
+        "check electrolyte levels",
+        "check thyroid function",
+        "trouble sleeping"
+      ],
+      "matched_transcript_facts": [
+        "increased urination frequency",
+        "refer to cardiologist",
+        "schedule follow-up appointment",
+        "constipation",
+        "order blood tests",
+        "lower back pain",
+        "increased tiredness",
+        "joint pain in hands and feet",
+        "dizziness when standing up quickly",
+        "anxiety"
+      ]
+    }
+  },
+  {
+    "id": 29,
+    "health_problem": "Injuries",
+    "hallucination_rate": 0.4,
+    "coverage_rate": 0.75,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.355,
+      "reason": "High Hallucination",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|unsupported_diagnosis|dangerous_omission|other",
+          "statement": "prescribe pain medication (nsaids)",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Remove unsupported test OR verify in EHR"
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "use of cane",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "HIGH",
+          "fix": "Add to model facts"
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "ankle injury with snapping sound",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "HIGH",
+          "fix": "Add to model facts"
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 12,
+      "model": 15
+    },
+    "details": {
+      "transcript_facts": [
+        "elbow pain",
+        "ankle injury",
+        "difficulty moving",
+        "hand weakness",
+        "difficulty gripping",
+        "examine ankle",
+        "examine elbow",
+        "schedule imaging tests",
+        "discuss physical therapy options",
+        "ankle injury with snapping sound",
+        "difficulty walking with limp",
+        "use of cane"
+      ],
+      "model_facts": [
+        "persistent dull ache in right elbow",
+        "sharp pain in right elbow",
+        "swelling in left ankle",
+        "pain in left ankle",
+        "difficulty walking without a limp",
+        "weakness in left hand",
+        "musculoskeletal pain",
+        "order x-rays of right elbow",
+        "order x-rays of left ankle",
+        "prescribe pain medication (nsaids)",
+        "recommend ice and elevation",
+        "initiate physical therapy consultation",
+        "schedule follow-up appointment",
+        "range of motion limited in left ankle due to pain and swelling",
+        "difficulty gripping"
+      ],
+      "hallucinated_facts": [
+        "prescribe pain medication (nsaids)",
+        "musculoskeletal pain",
+        "schedule follow-up appointment",
+        "recommend ice and elevation",
+        "order x-rays of left ankle",
+        "order x-rays of right elbow"
+      ],
+      "missing_facts": [
+        "ankle injury with snapping sound",
+        "use of cane",
+        "schedule imaging tests"
+      ],
+      "matched_transcript_facts": [
+        "ankle injury",
+        "examine ankle",
+        "examine elbow",
+        "hand weakness",
+        "discuss physical therapy options",
+        "difficulty moving",
+        "elbow pain",
+        "difficulty walking with limp",
+        "difficulty gripping"
+      ]
+    }
+  },
+  {
+    "id": 30,
+    "health_problem": "Joint Pain",
+    "hallucination_rate": 0.4667,
+    "coverage_rate": 0.6667,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.427,
+      "reason": "High Hallucination",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|unsupported_diagnosis|dangerous_omission|other",
+          "statement": "Model hallucinated 'educate patient on potential causes of knee pain and self-care measures', 'osteoarthritis', 'meniscal injury', 'patellofemoral pain syndrome', 'possible instability in the right knee', 'possible internal derangement of the right knee', 'provide patient with instructions regarding medication and activity modifications'",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Remove unsupported test OR verify in EHR"
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Missing 'knee swelling', 'knee pain worsens with bending/twisting', 'knee locking'",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "HIGH",
+          "fix": "Add missing findings to model output"
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 12,
+      "model": 15
+    },
+    "details": {
+      "transcript_facts": [
+        "persistent joint pain in right knee",
+        "knee stiffness",
+        "knee swelling",
+        "clicking sensation in knee",
+        "knee locking",
+        "celecoxib 200mg once daily",
+        "schedule mri",
+        "follow-up appointment in a couple of weeks",
+        "medication to manage pain",
+        "knee pain rated 7-8 when standing/walking",
+        "knee pain worsens with bending/twisting",
+        "previous knee twist a year ago"
+      ],
+      "model_facts": [
+        "right knee pain",
+        "swelling around the kneecap",
+        "clicking or locking sensations",
+        "possible instability in the right knee",
+        "possible internal derangement of the right knee",
+        "osteoarthritis",
+        "meniscal injury",
+        "patellofemoral pain syndrome",
+        "celecoxib 200mg once daily in the morning",
+        "schedule mri of the right knee",
+        "follow-up appointment in two weeks",
+        "provide patient with instructions regarding medication and activity modifications",
+        "educate patient on potential causes of knee pain and self-care measures",
+        "pain rated as 7-8 out of 10",
+        "history of a minor knee injury approximately one year prior"
+      ],
+      "hallucinated_facts": [
+        "educate patient on potential causes of knee pain and self-care measures",
+        "osteoarthritis",
+        "meniscal injury",
+        "patellofemoral pain syndrome",
+        "possible instability in the right knee",
+        "possible internal derangement of the right knee",
+        "provide patient with instructions regarding medication and activity modifications"
+      ],
+      "missing_facts": [
+        "medication to manage pain",
+        "knee swelling",
+        "knee pain worsens with bending/twisting",
+        "knee locking"
+      ],
+      "matched_transcript_facts": [
+        "schedule mri",
+        "clicking sensation in knee",
+        "previous knee twist a year ago",
+        "celecoxib 200mg once daily",
+        "knee pain rated 7-8 when standing/walking",
+        "persistent joint pain in right knee",
+        "knee stiffness",
+        "follow-up appointment in a couple of weeks"
+      ]
+    }
+  },
+  {
+    "id": 31,
+    "health_problem": "Flu (Influenza)",
+    "hallucination_rate": 0.35,
+    "coverage_rate": 0.7222,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.328,
+      "reason": "High Hallucination",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|dangerous_omission",
+          "statement": "Model hallucinated 'viral upper respiratory infection', 'prescribe short course of prednisone', 'continue current asthma medication regimen', 'asthma exacerbation', 'provide patient with education on proper inhaler technique and asthma management', 'low-grade fever', 'chills', 'inflammation in lungs'",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Remove hallucinated statements and ensure all relevant findings are documented."
+        },
+        {
+          "category": "missing_critical_finding|dangerous_omission",
+          "statement": "Model missed 'wheezing', 'chest tightness', 'shortness of breath', 'nurse to take blood pressure and draw blood', \"patient's hypertension is stable\"",
+          "risk_impact": "patient_safety|documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Ensure all physical exam findings and vital signs are accurately documented."
+        }
+      ],
+      "production_score": 0.1,
+      "recommendation": "QA_REVIEW|RETRAIN_PROMPT|MODEL_ISSUE",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 18,
+      "model": 20
+    },
+    "details": {
+      "transcript_facts": [
+        "persistent cough",
+        "chest tightness",
+        "shortness of breath",
+        "wheezing",
+        "fatigue",
+        "body aches",
+        "sore throat",
+        "inflammation in lungs",
+        "prednisone",
+        "order rapid flu test",
+        "order complete blood count",
+        "order lung function test",
+        "schedule follow-up appointment",
+        "nurse to take blood pressure and draw blood",
+        "patient uses inhaler as prescribed but feels it's not working",
+        "patient experiences stress",
+        "patient has allergies",
+        "patient's hypertension is stable"
+      ],
+      "model_facts": [
+        "persistent cough",
+        "chest tightness",
+        "fatigue",
+        "low-grade fever",
+        "chills",
+        "sore throat",
+        "body aches",
+        "asthma exacerbation",
+        "viral upper respiratory infection",
+        "prescribed inhaler",
+        "prednisone",
+        "order rapid flu test",
+        "order complete blood count (cbc)",
+        "schedule lung function test (spirometry)",
+        "prescribe short course of prednisone",
+        "continue current asthma medication regimen",
+        "schedule follow-up appointment in one week",
+        "provide patient with education on proper inhaler technique and asthma management",
+        "wheezing and decreased breath sounds",
+        "patient reports increased stress levels"
+      ],
+      "hallucinated_facts": [
+        "viral upper respiratory infection",
+        "prescribe short course of prednisone",
+        "continue current asthma medication regimen",
+        "asthma exacerbation",
+        "provide patient with education on proper inhaler technique and asthma management",
+        "low-grade fever",
+        "chills"
+      ],
+      "missing_facts": [
+        "wheezing",
+        "nurse to take blood pressure and draw blood",
+        "patient's hypertension is stable",
+        "inflammation in lungs",
+        "patient has allergies"
+      ],
+      "matched_transcript_facts": [
+        "chest tightness",
+        "fatigue",
+        "persistent cough",
+        "order rapid flu test",
+        "shortness of breath",
+        "schedule follow-up appointment",
+        "order complete blood count",
+        "sore throat",
+        "order lung function test",
+        "patient uses inhaler as prescribed but feels it's not working",
+        "patient experiences stress",
+        "body aches",
+        "prednisone"
+      ]
+    }
+  },
+  {
+    "id": 32,
+    "health_problem": "Anxiety and Depression",
+    "hallucination_rate": 0.5556,
+    "coverage_rate": 0.7273,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.471,
+      "reason": "High Hallucination",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|dangerous_omission",
+          "statement": "Hallucinated 'racing heart', 'sweating', 'worry about future events', 'provide psychoeducation', 'coordinate with therapist', 'explore psychotherapy (cbt, dbt)', 'consider different antidepressant', 'continue current medications'",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "CRITICAL",
+          "fix": "Remove hallucinated statements and ensure all relevant findings are present in the EHR."
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Missing 'increased sleep'",
+          "risk_impact": "documentation_quality",
+          "severity": "HIGH",
+          "fix": "Add 'increased sleep' to the note."
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 11,
+      "model": 18
+    },
+    "details": {
+      "transcript_facts": [
+        "anxiety",
+        "depression",
+        "difficulty concentrating",
+        "feelings of guilt or worthlessness",
+        "sertraline",
+        "buspirone",
+        "schedule follow-up appointment for four weeks",
+        "difficulty concentrating",
+        "feelings of guilt or worthlessness",
+        "decreased appetite",
+        "increased sleep"
+      ],
+      "model_facts": [
+        "anxiety",
+        "depression",
+        "racing heart",
+        "sweating",
+        "difficulty sleeping",
+        "worry about future events",
+        "guilt",
+        "worthlessness",
+        "difficulty concentrating",
+        "decreased appetite",
+        "sertraline",
+        "buspirone",
+        "continue current medications",
+        "schedule follow-up appointment in four weeks",
+        "coordinate with therapist",
+        "explore psychotherapy (cbt, dbt)",
+        "consider different antidepressant",
+        "provide psychoeducation"
+      ],
+      "hallucinated_facts": [
+        "explore psychotherapy (cbt, dbt)",
+        "worthlessness",
+        "coordinate with therapist",
+        "racing heart",
+        "consider different antidepressant",
+        "difficulty sleeping",
+        "sweating",
+        "worry about future events",
+        "provide psychoeducation",
+        "continue current medications"
+      ],
+      "missing_facts": [
+        "increased sleep"
+      ],
+      "matched_transcript_facts": [
+        "buspirone",
+        "difficulty concentrating",
+        "schedule follow-up appointment for four weeks",
+        "depression",
+        "decreased appetite",
+        "anxiety",
+        "sertraline",
+        "feelings of guilt or worthlessness"
+      ]
+    }
+  },
+  {
+    "id": 33,
+    "health_problem": "Ear Infections",
+    "hallucination_rate": 0.45,
+    "coverage_rate": 0.8462,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.361,
+      "reason": "High Hallucination",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|dangerous_omission",
+          "statement": "Model invented 'prescribe augmentin', 'complete full course of antibiotics', 'educate on ear hygiene', 'schedule follow-up appointment'",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "CRITICAL",
+          "fix": "Remove unsupported actions OR verify in EHR"
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Missing 'monitor symptoms', 'low-grade fevers (100-101)'",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "HIGH",
+          "fix": "Add missing information to the note"
+        }
+      ],
+      "production_score": 0.3,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 13,
+      "model": 20
+    },
+    "details": {
+      "transcript_facts": [
+        "ear infection",
+        "irritability",
+        "difficulty sleeping",
+        "high cholesterol",
+        "hypertension",
+        "augmentin twice daily for 7 days",
+        "vaccinations (pneumococcal and influenza)",
+        "colorectal cancer screening",
+        "monitor symptoms",
+        "practice stress-reducing techniques",
+        "inflammation and redness in both ears",
+        "discharge and odor in both ears",
+        "low-grade fevers (100-101)"
+      ],
+      "model_facts": [
+        "ear pain in both ears",
+        "discharge and odor",
+        "hearing difficulties",
+        "insomnia",
+        "irritability",
+        "hypertension",
+        "diabetes",
+        "high cholesterol",
+        "augmentin (amoxicillin/clavulanate) 625mg/875mg twice daily",
+        "prescribe augmentin",
+        "complete full course of antibiotics",
+        "schedule follow-up appointment",
+        "educate on ear hygiene",
+        "reinforce medication adherence",
+        "schedule vaccinations",
+        "schedule colorectal cancer screening",
+        "recommend stress-reducing techniques",
+        "acute bilateral otitis media",
+        "inflammation and redness in both ears",
+        "bilateral ear infections"
+      ],
+      "hallucinated_facts": [
+        "prescribe augmentin",
+        "hearing difficulties",
+        "diabetes",
+        "reinforce medication adherence",
+        "bilateral ear infections",
+        "educate on ear hygiene",
+        "schedule follow-up appointment",
+        "complete full course of antibiotics",
+        "inflammation and redness in both ears"
+      ],
+      "missing_facts": [
+        "low-grade fevers (100-101)",
+        "monitor symptoms"
+      ],
+      "matched_transcript_facts": [
+        "practice stress-reducing techniques",
+        "vaccinations (pneumococcal and influenza)",
+        "hypertension",
+        "colorectal cancer screening",
+        "ear infection",
+        "difficulty sleeping",
+        "augmentin twice daily for 7 days",
+        "irritability",
+        "inflammation and redness in both ears",
+        "discharge and odor in both ears",
+        "high cholesterol"
+      ]
+    }
+  },
+  {
+    "id": 34,
+    "health_problem": "Heart Conditions",
+    "hallucination_rate": 0.2857,
+    "coverage_rate": 0.625,
+    "triage": {
+      "needs_judge": true,
+      "risk_score": 0.312,
+      "reason": "Low Coverage",
+      "priority": "high"
+    },
+    "judge_evaluation": {
+      "deepscribe_issues": [
+        {
+          "category": "hallucinated_medication|missing_critical_finding|dangerous_omission",
+          "statement": "Model invented 'order thyroid stimulating hormone (tsh)'",
+          "risk_impact": "patient_safety|documentation_quality",
+          "severity": "CRITICAL",
+          "fix": "Remove unsupported test OR verify in EHR"
+        },
+        {
+          "category": "missing_critical_finding",
+          "statement": "Model missing 'rule out anemia', 'check vitamin d levels', 'run blood work', 'check thyroid function', 'occasional dizziness', 'reassess in a few days'",
+          "risk_impact": "documentation_quality|treatment_delay",
+          "severity": "CRITICAL",
+          "fix": "Add missing findings to the note"
+        }
+      ],
+      "production_score": 0.2,
+      "recommendation": "QA_REVIEW",
+      "needs_clinician_review": true
+    },
+    "fact_counts": {
+      "transcript": 16,
+      "model": 14
+    },
+    "details": {
+      "transcript_facts": [
+        "fatigue",
+        "shortness of breath",
+        "dizziness",
+        "occasional dizziness",
+        "low dose of beta blocker",
+        "order stress test",
+        "order echocardiogram",
+        "run blood work",
+        "check thyroid function",
+        "check vitamin d levels",
+        "rule out anemia",
+        "reassess in a few days",
+        "increased appetite",
+        "weight gain (10 pounds in the past few months)",
+        "trouble falling asleep",
+        "wakes up a few times during the night"
+      ],
+      "model_facts": [
+        "persistent fatigue",
+        "shortness of breath with exertion",
+        "intermittent dizziness",
+        "occasional palpitations",
+        "increased appetite",
+        "weight gain (approximately 10 pounds in the past few months)",
+        "difficulty falling asleep",
+        "waking up a few times during the night",
+        "low-dose beta blocker",
+        "order stress test",
+        "schedule echocardiogram",
+        "order complete blood count (cbc)",
+        "order thyroid stimulating hormone (tsh)",
+        "schedule follow-up appointment in one week to review test results and adjust treatment plan"
+      ],
+      "hallucinated_facts": [
+        "order complete blood count (cbc)",
+        "occasional palpitations",
+        "schedule follow-up appointment in one week to review test results and adjust treatment plan",
+        "order thyroid stimulating hormone (tsh)"
+      ],
+      "missing_facts": [
+        "rule out anemia",
+        "check vitamin d levels",
+        "run blood work",
+        "check thyroid function",
+        "occasional dizziness",
+        "reassess in a few days"
+      ],
+      "matched_transcript_facts": [
+        "weight gain (10 pounds in the past few months)",
+        "wakes up a few times during the night",
+        "fatigue",
+        "shortness of breath",
+        "dizziness",
+        "order stress test",
+        "order echocardiogram",
+        "trouble falling asleep",
+        "increased appetite",
+        "low dose of beta blocker"
+      ]
+    }
+  }
+]

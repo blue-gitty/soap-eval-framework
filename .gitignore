@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Environment & Secrets
+.env
+.env.local
+*.key
+*.pem
+
+# Data & Results (keep structure, ignore content)
+data/*.json
+data/*.csv
+results/*.json
+results/*.csv
+!results/.gitkeep
+!results/processed/.gitkeep
+
+# Reports (generated files)
+reports/*.png
+reports/*.csv
+reports/*.json
+!reports/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Logs
+*.log
+logs/

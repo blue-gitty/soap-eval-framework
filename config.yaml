@@ -1,0 +1,62 @@
+# DeepScribe Evals Configuration
+# Change settings here to switch models/providers without editing code
+
+# LLM Settings for Fact Extraction
+llm:
+  # Provider: "ollama" (local), "openai" (cloud), or "gemini" (cloud)
+  provider: "ollama"
+  
+  # Model name
+  # Ollama examples: "gemma3:4b", "gemma:7b", "llama3:8b", "mistral"
+  # OpenAI examples: "gpt-4o-mini", "gpt-4o", "gpt-3.5-turbo"
+  # Gemini examples: "gemini-pro", "gemini-1.5-pro", "gemini-1.5-flash"
+  model: "gemma3:4b"
+  
+  # Prompt strategy: "zero-shot", "one-shot", "few-shot"
+  prompt_strategy: "few-shot"
+  
+  # Temperature (0.0 = deterministic, 1.0 = creative)
+  temperature: 0.1
+  
+  # Max retries on failure
+  max_retries: 3
+
+# API Keys - DO NOT COMMIT KEYS TO THIS FILE!
+# Set these via environment variables for security:
+#   export GEMINI_API_KEY="your-key-here"
+#   export OPENAI_API_KEY="your-key-here"
+# Or create a .env file in the project root (see .env.example)
+#
+# The code will check environment variables first, then fall back to these (if set).
+# For security, leave these empty and use environment variables only.
+openai_api_key: ""
+
+# Google Gemini API Key (for embeddings and LLM)
+# Set via GEMINI_API_KEY environment variable
+gemini_api_key: ""
+
+# Embeddings for semantic similarity matching
+embeddings:
+  # Provider: "gemini", "openai", or "local" (SentenceTransformer)
+  provider: "gemini"
+  
+  # Model name
+  # Gemini: "text-embedding-004", "embedding-001"
+  # OpenAI: "text-embedding-3-small", "text-embedding-ada-002"
+  # Local: "all-MiniLM-L6-v2" (SentenceTransformer)
+  model: "text-embedding-004"
+  
+  # Similarity threshold for fact matching (0.0 - 1.0)
+  similarity_threshold: 0.75
+
+# Evaluation Settings
+evaluation:
+  # Thresholds for flagging notes
+  min_recall: 0.7
+  max_hallucination_rate: 0.1
+  min_f1: 0.7
+
+# Output Settings
+output:
+  results_dir: "results"
+  save_detailed_results: true
