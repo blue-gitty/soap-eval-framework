@@ -5,7 +5,7 @@ Get the evaluation framework running in 5 minutes.
 ## Step 1: Clone & Setup (2 min)
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/blue-gitty/soap-eval-framework.git
 cd deepscribe-evals
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
