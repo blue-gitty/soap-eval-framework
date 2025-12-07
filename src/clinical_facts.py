@@ -24,8 +24,6 @@ except ImportError:
     OLLAMA_AVAILABLE = False
 
 
-
-
 class ClinicalFacts(BaseModel):
     """Structured clinical facts extracted from text."""
     problems: List[str] = Field(default_factory=list, description="Patient problems, complaints, diagnoses")

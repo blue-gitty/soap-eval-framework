@@ -15,8 +15,6 @@ from sklearn.metrics import cohen_kappa_score
 
 # Style Settings
 plt.style.use('seaborn-v0_8-whitegrid')
-COLORS = sns.color_palette("viridis", 8)
-RISK_COLORS = ['#2ecc71', '#f1c40f', '#e67e22', '#e74c3c'] # Green, Yellow, Orange, Red
 
 def get_reports_dir():
     """Get reports directory path consistently - ensures we're in project root, not parent."""
@@ -285,8 +283,7 @@ def plot_coverage_hallucination_tradeoff(df_non):
         print("  ⚠️  Skipping tradeoff plot: No valid data after cleaning")
         return
     
-    # Calculate correlation
-    from scipy.stats import pearsonr
+    # Calculate correlation (using top-level import)
     r, p_value = pearsonr(df_clean['coverage_rate'], df_clean['hallucination_rate'])
     
     plt.figure(figsize=(10, 6))
@@ -532,6 +529,165 @@ def save_health_problem_metrics_table(df_ref, output_path=None, metric='semantic
         print("⚠️  No data to save.")
         return None
 
+def generate_comprehensive_health_problem_summary(df_ref):
+    """
+    Generate comprehensive health problem summary table (like notebook version).
+    Groups by health_problem and shows multiple key metrics in one table.
+    
+    Args:
+        df_ref: DataFrame with reference-based eval results
+        
+    Returns:
+        DataFrame with columns: Condition, Case Count, Overall F1, Semantic Sim, 
+        Plan Missing %, Plan Halluc %, Assessment F1
+    """
+    if df_ref.empty:
+        return pd.DataFrame()
+    
+    # Flatten nested metrics structure
+    rows = []
+    for _, row in df_ref.iterrows():
+        health_problem = row['health_problem']
+        metrics = row['metrics']
+        
+        rows.append({
+            'health_problem': health_problem,
+            'id': row.get('id', ''),
+            'overall_f1': metrics.get('overall', {}).get('f1', 0.0),
+            'overall_semantic_similarity': metrics.get('overall', {}).get('semantic_similarity', 0.0),
+            'plan_missing_rate': metrics.get('plan', {}).get('missing_rate', 0.0),
+            'plan_hallucinated_rate': metrics.get('plan', {}).get('hallucinated_rate', 0.0),
+            'assessment_f1': metrics.get('assessment', {}).get('f1', 0.0)
+        })
+    
+    df_flat = pd.DataFrame(rows)
+    
+    if df_flat.empty:
+        return pd.DataFrame()
+    
+    # Group by health_problem and calculate key metrics
+    summary = df_flat.groupby('health_problem').agg({
+        'id': 'count',
+        'overall_f1': 'mean',
+        'overall_semantic_similarity': 'mean',
+        'plan_missing_rate': 'mean',
+        'plan_hallucinated_rate': 'mean',
+        'assessment_f1': 'mean'
+    }).rename(columns={
+        'id': 'Case Count',
+        'overall_f1': 'Overall F1',
+        'overall_semantic_similarity': 'Semantic Sim',
+        'plan_missing_rate': 'Plan Missing %',
+        'plan_hallucinated_rate': 'Plan Halluc %',
+        'assessment_f1': 'Assessment F1'
+    })
+    
+    # Round to 4 decimal places
+    for col in summary.columns:
+        if col != 'Case Count':
+            summary[col] = summary[col].round(4)
+    
+    # Sort by lowest Overall F1 first (to highlight problem areas)
+    summary = summary.sort_values('Overall F1', ascending=True).reset_index()
+    summary.rename(columns={'health_problem': 'Condition'}, inplace=True)
+    
+    return summary
+
+def generate_non_ref_health_problem_summary(df_non):
+    """
+    Generate comprehensive health problem summary for non-reference evaluation.
+    
+    Args:
+        df_non: DataFrame with non-reference eval results
+        
+    Returns:
+        DataFrame with columns: Condition, Case Count, Avg Hallucination Rate, 
+        Avg Coverage Rate, Avg Risk Score
+    """
+    if df_non.empty:
+        return pd.DataFrame()
+    
+    # Group by health_problem
+    summary = df_non.groupby('health_problem').agg({
+        'id': 'count',
+        'hallucination_rate': 'mean',
+        'coverage_rate': 'mean'
+    }).rename(columns={
+        'id': 'Case Count',
+        'hallucination_rate': 'Avg Hallucination Rate',
+        'coverage_rate': 'Avg Coverage Rate'
+    })
+    
+    # Add risk score if available
+    if 'triage' in df_non.columns:
+        risk_scores = df_non['triage'].apply(
+            lambda x: x.get('risk_score', 0) if isinstance(x, dict) else (x if isinstance(x, (int, float)) else 0)
+        )
+        df_non_with_risk = df_non.copy()
+        df_non_with_risk['risk_score'] = risk_scores
+        risk_summary = df_non_with_risk.groupby('health_problem')['risk_score'].mean()
+        summary['Avg Risk Score'] = risk_summary
+    
+    # Round to 4 decimal places
+    for col in summary.columns:
+        if col != 'Case Count':
+            summary[col] = summary[col].round(4)
+    
+    # Sort by highest risk first
+    if 'Avg Risk Score' in summary.columns:
+        summary = summary.sort_values('Avg Risk Score', ascending=False).reset_index()
+    else:
+        summary = summary.sort_values('Avg Hallucination Rate', ascending=False).reset_index()
+    
+    summary.rename(columns={'health_problem': 'Condition'}, inplace=True)
+    
+    return summary
+
+def print_comprehensive_health_summary(df_ref, df_non):
+    """Print comprehensive health problem summaries for both ref and non-ref."""
+    print("\n" + "="*80)
+    print("📊 COMPREHENSIVE HEALTH PROBLEM SUMMARY")
+    print("="*80)
+    
+    if not df_ref.empty:
+        print("\n🔬 Reference-Based Evaluation Summary:")
+        print("-" * 80)
+        ref_summary = generate_comprehensive_health_problem_summary(df_ref)
+        if not ref_summary.empty:
+            print(ref_summary.to_string(index=False))
+        else:
+            print("No data available.")
+    
+    if not df_non.empty:
+        print("\n📋 Non-Reference Evaluation Summary:")
+        print("-" * 80)
+        non_ref_summary = generate_non_ref_health_problem_summary(df_non)
+        if not non_ref_summary.empty:
+            print(non_ref_summary.to_string(index=False))
+        else:
+            print("No data available.")
+    
+    print("="*80)
+
+def save_comprehensive_health_summary(df_ref, df_non):
+    """Save comprehensive health problem summaries to CSV."""
+    reports_dir = get_reports_dir()
+    reports_dir.mkdir(parents=True, exist_ok=True)
+    
+    if not df_ref.empty:
+        ref_summary = generate_comprehensive_health_problem_summary(df_ref)
+        if not ref_summary.empty:
+            ref_path = reports_dir / "health_problem_summary_ref_based.csv"
+            ref_summary.to_csv(ref_path, index=False)
+            print(f"✅ Reference-based summary saved to {ref_path}")
+    
+    if not df_non.empty:
+        non_ref_summary = generate_non_ref_health_problem_summary(df_non)
+        if not non_ref_summary.empty:
+            non_ref_path = reports_dir / "health_problem_summary_non_ref.csv"
+            non_ref_summary.to_csv(non_ref_path, index=False)
+            print(f"✅ Non-reference summary saved to {non_ref_path}")
+
 # -----------------------------------------------------------------------------
 # 7. FRAMEWORK VALIDATION METRICS (Inter-Rater Reliability)
 # -----------------------------------------------------------------------------
@@ -615,21 +771,6 @@ def bin_risk_score(score, thresholds=[0.2, 0.4, 0.6]):
     else:
         return "CRITICAL"
 
-def bin_priority(priority):
-    """Normalize priority to standard categories."""
-    if pd.isna(priority) or priority is None:
-        return None
-    priority_str = str(priority).lower()
-    if 'low' in priority_str:
-        return "LOW"
-    elif 'medium' in priority_str or 'moderate' in priority_str:
-        return "MODERATE"
-    elif 'high' in priority_str:
-        return "HIGH"
-    elif 'critical' in priority_str:
-        return "CRITICAL"
-    else:
-        return "MODERATE"  # Default
 
 def compute_icc(x, y):
     """
@@ -847,17 +988,38 @@ def compute_validation_metrics():
         print("\n  Pairing: Ref vs Non-Ref")
         ref_metrics_dict = {m: [] for m in target_metrics}
         non_metrics_dict = {m: [] for m in target_metrics}
+        ref_risk_cats = []
+        non_priorities = []
         
+        # Extract metrics and risk categories in one pass
         for match in matched_ref_non:
-            ref_m = extract_ref_metrics(match['row1'])
-            non_m = extract_non_metrics(match['row2'])
+            ref_row = match['row1']
+            non_row = match['row2']
+            ref_m = extract_ref_metrics(ref_row)
+            non_m = extract_non_metrics(non_row)
+            
+            # Collect metrics for Pearson
             for metric in target_metrics:
                 ref_metrics_dict[metric].append(ref_m[metric])
                 non_metrics_dict[metric].append(non_m[metric])
+            
+            # Collect risk categories for Kappa
+            ref_risk_cat = ref_row.get('risk_category', None)
+            ref_num = map_risk_category_to_numeric(ref_risk_cat)
+            
+            triage = non_row.get('triage', {})
+            if isinstance(triage, dict):
+                non_priority = triage.get('priority', None)
+                non_num = map_priority_to_numeric(non_priority)
+            else:
+                non_num = None
+            
+            if ref_num is not None and non_num is not None:
+                ref_risk_cats.append(ref_num)
+                non_priorities.append(non_num)
         
         # Compute Pearson for each metric
         best_pearson = None
-        best_metric = None
         for metric in target_metrics:
             ref_arr = np.array(ref_metrics_dict[metric])
             non_arr = np.array(non_metrics_dict[metric])
@@ -869,33 +1031,10 @@ def compute_validation_metrics():
                 
                 if best_pearson is None or abs(r) > abs(best_pearson):
                     best_pearson = r
-                    best_metric = metric
                 
                 print(f"    {metric}: r = {r:.4f} (p={p:.4f}, n={mask.sum()})")
         
-        # Risk Category Kappa (Ref risk_category vs Non-Ref triage.priority)
-        ref_risk_cats = []
-        non_priorities = []
-        
-        for match in matched_ref_non:
-            ref_row = match['row1']
-            non_row = match['row2']
-            
-            # Ref: risk_category
-            ref_risk_cat = ref_row.get('risk_category', None)
-            ref_num = map_risk_category_to_numeric(ref_risk_cat)
-            
-            # Non-Ref: triage.priority
-            triage = non_row.get('triage', {})
-            if isinstance(triage, dict):
-                non_priority = triage.get('priority', None)
-                non_num = map_priority_to_numeric(non_priority)
-            else:
-                non_num = None
-            
-            if ref_num is not None and non_num is not None:
-                ref_risk_cats.append(ref_num)
-                non_priorities.append(non_num)
+        # Risk Category Kappa (already collected above)
         
         kappa_ref_non = None
         if len(ref_risk_cats) >= 2:
@@ -923,16 +1062,21 @@ def compute_validation_metrics():
         ref_metrics_dict = {m: [] for m in target_metrics}
         self_metrics_dict = {m: [] for m in target_metrics}
         
+        # Extract metrics and f1 scores in one pass
+        ref_f1 = []
+        self_f1 = []
         for match in matched_ref_self:
             ref_m = extract_ref_metrics(match['row1'])
             self_m = extract_self_metrics(match['row2'])
             for metric in target_metrics:
                 ref_metrics_dict[metric].append(ref_m[metric])
                 self_metrics_dict[metric].append(self_m[metric])
+            # Also collect f1 for ICC
+            ref_f1.append(ref_m['f1_score'])
+            self_f1.append(self_m['f1_score'])
         
         # Compute Pearson for each metric
         best_pearson = None
-        best_metric = None
         for metric in target_metrics:
             ref_arr = np.array(ref_metrics_dict[metric])
             self_arr = np.array(self_metrics_dict[metric])
@@ -944,18 +1088,10 @@ def compute_validation_metrics():
                 
                 if best_pearson is None or abs(r) > abs(best_pearson):
                     best_pearson = r
-                    best_metric = metric
                 
                 print(f"    {metric}: r = {r:.4f} (p={p:.4f}, n={mask.sum()})")
         
-        # ICC for overall f1_score
-        ref_f1 = []
-        self_f1 = []
-        for match in matched_ref_self:
-            ref_m = extract_ref_metrics(match['row1'])
-            self_m = extract_self_metrics(match['row2'])
-            ref_f1.append(ref_m['f1_score'])
-            self_f1.append(self_m['f1_score'])
+        # ICC for overall f1_score (already collected above)
         
         ref_f1_arr = np.array(ref_f1)
         self_f1_arr = np.array(self_f1)
@@ -987,38 +1123,21 @@ def compute_validation_metrics():
         non_metrics_dict = {m: [] for m in target_metrics}
         self_metrics_dict = {m: [] for m in target_metrics}
         
-        for match in matched_non_self:
-            non_m = extract_non_metrics(match['row1'])
-            self_m = extract_self_metrics(match['row2'])
-            for metric in target_metrics:
-                non_metrics_dict[metric].append(non_m[metric])
-                self_metrics_dict[metric].append(self_m[metric])
-        
-        # Compute Pearson for each metric
-        best_pearson = None
-        for metric in target_metrics:
-            non_arr = np.array(non_metrics_dict[metric])
-            self_arr = np.array(self_metrics_dict[metric])
-            mask = ~(pd.isna(non_arr) | pd.isna(self_arr))
-            
-            if mask.sum() >= 3:
-                r, p = pearsonr(non_arr[mask], self_arr[mask])
-                pearson_matrix[f'non_ref_vs_self_val_{metric}'] = {'r': float(r), 'p': float(p), 'n': int(mask.sum())}
-                
-                if best_pearson is None or abs(r) > abs(best_pearson):
-                    best_pearson = r
-                
-                print(f"    {metric}: r = {r:.4f} (p={p:.4f}, n={mask.sum()})")
-        
-        # Risk Category Kappa (Non-Ref triage.priority vs Self-Val proxy)
+        # Extract metrics and risk categories in one pass
         non_priorities = []
         self_risk_cats = []
-        
         for match in matched_non_self:
             non_row = match['row1']
             self_row = match['row2']
+            non_m = extract_non_metrics(non_row)
+            self_m = extract_self_metrics(self_row)
             
-            # Non-Ref: triage.priority
+            # Collect metrics for Pearson
+            for metric in target_metrics:
+                non_metrics_dict[metric].append(non_m[metric])
+                self_metrics_dict[metric].append(self_m[metric])
+            
+            # Collect risk categories for Kappa
             triage = non_row.get('triage', {})
             if isinstance(triage, dict):
                 non_priority = triage.get('priority', None)
@@ -1036,6 +1155,24 @@ def compute_validation_metrics():
             if non_num is not None and self_num is not None:
                 non_priorities.append(non_num)
                 self_risk_cats.append(self_num)
+        
+        # Compute Pearson for each metric
+        best_pearson = None
+        for metric in target_metrics:
+            non_arr = np.array(non_metrics_dict[metric])
+            self_arr = np.array(self_metrics_dict[metric])
+            mask = ~(pd.isna(non_arr) | pd.isna(self_arr))
+            
+            if mask.sum() >= 3:
+                r, p = pearsonr(non_arr[mask], self_arr[mask])
+                pearson_matrix[f'non_ref_vs_self_val_{metric}'] = {'r': float(r), 'p': float(p), 'n': int(mask.sum())}
+                
+                if best_pearson is None or abs(r) > abs(best_pearson):
+                    best_pearson = r
+                
+                print(f"    {metric}: r = {r:.4f} (p={p:.4f}, n={mask.sum()})")
+        
+        # Risk Category Kappa (already collected above)
         
         kappa_non_self = None
         if len(non_priorities) >= 2:
@@ -1178,7 +1315,7 @@ def run_dashboard():
         plot_risk_waterfall(df_ref)
         plot_combined_radars(df_ref)
         
-        # Print and save health problem metrics table
+        # Print and save health problem metrics table (section-by-section, detailed)
         print_health_problem_metrics_table(df_ref, metric='semantic_similarity')
         save_health_problem_metrics_table(df_ref, metric='semantic_similarity')
     
@@ -1186,6 +1323,11 @@ def run_dashboard():
         plot_production_matrix(df_non)
         plot_pareto_curve(df_non) # Now uses NON-REF
         plot_coverage_hallucination_tradeoff(df_non)
+    
+    # Generate comprehensive health problem summaries (executive-friendly, one table per pipeline)
+    print("\n📊 Generating comprehensive health problem summaries...")
+    print_comprehensive_health_summary(df_ref, df_non)
+    save_comprehensive_health_summary(df_ref, df_non)
         
     if not df_ref.empty and not df_non.empty:
         plot_eval_validation(df_ref, df_non)
