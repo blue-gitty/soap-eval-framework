@@ -31,7 +31,6 @@ python run_full_eval_suite.py --use-processed --charts
 **Documentation**:
 - **[QUICK_START.md](QUICK_START.md)** - 5-minute setup guide ⚡
 - **[SETUP.md](SETUP.md)** - Detailed setup instructions
-- **[PRODUCTION_GUIDE.md](PRODUCTION_GUIDE.md)** - Advanced configuration
 
 ## 📋 Features
 
@@ -56,9 +55,10 @@ python run_full_eval_suite.py --use-processed --charts
 ### Meta-Analysis & Visualization
 
 - **Framework Validation**: Pearson correlations, Cohen's Kappa, ICC across pipelines
-- **Executive Dashboard**: 7+ charts (waterfall, production matrix, pareto, radar, violin)
-- **Health Problem Metrics**: Grouped analysis by condition
+- **Executive Dashboard**: 7+ charts saved to `reports/executive_dashboard/` (waterfall, production matrix, pareto, radar, tradeoff)
+- **Health Problem Metrics**: Grouped analysis by condition (CSV tables in `reports/`)
 - **Correlation Heatmaps**: Inter-pipeline agreement visualization
+- **Execution Logs**: Timestamped logs in `reports/logs/` capturing all pipeline output
 
 ## 🎯 Usage
 
@@ -90,23 +90,39 @@ python src/run_self_validation.py --limit 20
 
 ## 📊 Output Structure
 
+All outputs are saved in the `reports/` folder:
+
 ```
 results/
 ├── reference_based_evals.json      # Model vs Gold metrics
 ├── non_reference_evals.json        # Model vs Transcript metrics
 ├── self_validation_evals.json      # Transcript vs Gold validation
-└── processed/                      # Pre-computed results (fast mode)
+└── processed/                      # Pre-computed results (FAST mode)
 
 reports/
-├── executive_dashboard/            # Visual charts (PNG)
+├── executive_dashboard/            # 📊 Visual charts (PNG files)
 │   ├── risk_waterfall.png
 │   ├── production_matrix.png
 │   ├── pareto_risk.png
-│   └── ...
-├── framework_validation_metrics.json  # Meta-analysis
-├── executive_validation_table.csv     # Summary table
-└── pearson_correlation_matrix.csv     # Correlations
+│   ├── radar_hallucinated_rate.png
+│   ├── radar_missing_rate.png
+│   ├── eval_validation.png
+│   └── coverage_hallucination_tradeoff.png
+├── logs/                          # 📝 Execution logs (timestamped)
+│   └── eval_suite_YYYYMMDD_HHMMSS.log
+├── framework_validation_metrics.json  # Meta-analysis results
+├── executive_validation_table.csv     # Summary table (CSV)
+├── pearson_correlation_matrix.csv     # Correlation matrix (CSV)
+├── health_problem_summary_ref_based.csv      # Health problem metrics (CSV)
+├── health_problem_summary_non_ref.csv        # Health problem metrics (CSV)
+└── health_problem_semantic_similarity_table.csv  # Detailed metrics (CSV)
 ```
+
+**Output Locations:**
+- **Charts/Dashboards**: `reports/executive_dashboard/` (PNG files)
+- **Tables**: `reports/` root (CSV files)
+- **Logs**: `reports/logs/` (timestamped log files from `run_full_eval_suite.py`)
+- **Meta-analysis**: `reports/framework_validation_metrics.json`
 
 ## ⚙️ Configuration
 

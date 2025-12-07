@@ -59,7 +59,7 @@ Should show: ✅ All checks passed
 
 ## Step 4: Run Evaluation (1 min)
 
-**Fast Mode** (uses pre-existing results):
+**Fast Mode** (uses pre-existing results, already generated SOAP notes metrics):
 ```bash
 python run_full_eval_suite.py --use-processed --charts
 ```
