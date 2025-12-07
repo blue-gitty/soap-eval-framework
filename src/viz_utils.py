@@ -269,29 +269,48 @@ def plot_pareto_curve(df_non):
     plt.close()
 
 # -----------------------------------------------------------------------------
-# 3b. VIOLIN PLOT (Domain Monitoring)
+# 3b. COVERAGE-HALLUCINATION TRADEOFF (Critical Relationship)
 # -----------------------------------------------------------------------------
-def plot_violin_risk(df_non):
-    """Violin plot of Hallucination Rates by Condition."""
-    print("Generating Violin Plot...")
+def plot_coverage_hallucination_tradeoff(df_non):
+    """Scatter plot showing coverage-hallucination tradeoff with regression line."""
+    print("Generating Coverage-Hallucination Tradeoff Plot...")
     
-    plt.figure(figsize=(12, 6))
+    if df_non.empty or 'coverage_rate' not in df_non.columns or 'hallucination_rate' not in df_non.columns:
+        print("  ⚠️  Skipping tradeoff plot: Required columns missing")
+        return
     
-    # Sort by median hallucination rate
-    order = df_non.groupby('health_problem')['hallucination_rate'].median().sort_values(ascending=False).index
+    # Filter out NaN values
+    df_clean = df_non.dropna(subset=['coverage_rate', 'hallucination_rate'])
+    if df_clean.empty:
+        print("  ⚠️  Skipping tradeoff plot: No valid data after cleaning")
+        return
     
-    # Use hue to get distinct colors per condition (fixes deprecation warning)
-    sns.violinplot(data=df_non, x='health_problem', y='hallucination_rate', hue='health_problem', order=order, palette='muted', inner='stick', legend=False)
+    # Calculate correlation
+    from scipy.stats import pearsonr
+    r, p_value = pearsonr(df_clean['coverage_rate'], df_clean['hallucination_rate'])
     
-    plt.title('Hallucination Rate Distribution by Condition (Violin)', fontsize=16, fontweight='bold')
-    plt.ylabel('Hallucination Rate')
-    plt.xlabel('Condition')
-    plt.xticks(rotation=45, ha='right')
+    plt.figure(figsize=(10, 6))
+    
+    # Scatter plot
+    sns.scatterplot(data=df_clean, x='coverage_rate', y='hallucination_rate', alpha=0.6, s=50)
+    
+    # Regression line with correlation coefficient
+    ax = sns.regplot(data=df_clean, x='coverage_rate', y='hallucination_rate', 
+                     scatter=False, line_kws={'color': 'red', 'label': f'r={r:.2f}'})
+    
+    plt.title('Coverage-Hallucination Tradeoff (CRITICAL)', fontsize=16, fontweight='bold')
+    plt.xlabel('Coverage Rate', fontsize=12)
+    plt.ylabel('Hallucination Rate', fontsize=12)
+    plt.grid(True, alpha=0.3)
+    
+    # Add legend with correlation coefficient
+    if not np.isnan(r):
+        plt.legend([f'Regression line (r={r:.2f})'])
     
     plt.tight_layout()
     reports_dir = get_reports_dir()
     (reports_dir / "executive_dashboard").mkdir(parents=True, exist_ok=True)
-    plt.savefig(reports_dir / "executive_dashboard" / "violin_condition.png", dpi=300)
+    plt.savefig(reports_dir / "executive_dashboard" / "coverage_hallucination_tradeoff.png", dpi=300)
     plt.close()
 
 # -----------------------------------------------------------------------------
@@ -1166,7 +1185,7 @@ def run_dashboard():
     if not df_non.empty:
         plot_production_matrix(df_non)
         plot_pareto_curve(df_non) # Now uses NON-REF
-        plot_violin_risk(df_non)  # New
+        plot_coverage_hallucination_tradeoff(df_non)
         
     if not df_ref.empty and not df_non.empty:
         plot_eval_validation(df_ref, df_non)

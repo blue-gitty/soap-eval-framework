@@ -10,8 +10,7 @@ A comprehensive evaluation framework for clinical SOAP note generation, featurin
 
 ```bash
 # 1. Clone and setup
-git clone <your-repo-url>
-cd deepscribe-evals
+git clone https://github.com/blue-gitty/soap-eval-framework.git
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
@@ -39,7 +38,7 @@ python run_full_eval_suite.py --use-processed --charts
 ### Three Evaluation Pipelines
 
 1. **Reference-Based Evaluation** (`run_reference_based_eval_pipeline.py`)
-   - Compares model-generated SOAP notes against clinician gold standard
+   - Compares model-generated SOAP notes against clinician gold standard SOAP
    - Metrics: F1, precision, recall, semantic similarity (section-level & overall)
    - Risk scoring and categorization
 
@@ -85,7 +84,7 @@ python src/run_reference_based_eval_pipeline.py --limit 20
 # Non-reference
 python src/run_non_reference_eval.py --limit 20
 
-# Self-validation
+# Self-validation of the Eval framework
 python src/run_self_validation.py --limit 20
 ```
 
@@ -220,18 +219,6 @@ python -c "from src.llm_client import query_llm; print('LLM client OK')"
 - ✅ Warnings if keys found in config.yaml
 - ✅ No sensitive data in repository
 
-## 📝 License
-
-[Add your license here]
-
-## 📧 Contact
-
-[Add your contact information]
-
 ---
 
 **Note for Reviewers**: This repository is set up for easy testing. See [QUICK_START.md](QUICK_START.md) for a 5-minute setup guide. The `--use-processed` flag allows instant results without running the full pipeline.
-
----
-
-**Built for technical assessment** - Comprehensive evaluation framework for clinical note generation.
