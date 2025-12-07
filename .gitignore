@@ -15,6 +15,7 @@ build/
 .env.local
 *.key
 *.pem
+# Note: .env.example should be tracked (it's a template with no real keys)
 
 # Data & Results (keep structure, ignore content)
 data/*.json
