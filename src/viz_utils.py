@@ -275,12 +275,37 @@ def plot_violin_risk(df_non):
     """Violin plot of Hallucination Rates by Condition."""
     print("Generating Violin Plot...")
     
+    # Validate input
+    if df_non.empty:
+        print("  ⚠️  Skipping violin plot: No data available")
+        return
+    
+    if 'health_problem' not in df_non.columns or 'hallucination_rate' not in df_non.columns:
+        print("  ⚠️  Skipping violin plot: Required columns missing")
+        return
+    
+    # Filter out NaN values
+    df_clean = df_non.dropna(subset=['health_problem', 'hallucination_rate'])
+    if df_clean.empty:
+        print("  ⚠️  Skipping violin plot: No valid data after cleaning")
+        return
+    
+    # Check if we have multiple conditions
+    unique_conditions = df_clean['health_problem'].nunique()
+    if unique_conditions < 2:
+        print(f"  ⚠️  Skipping violin plot: Need at least 2 conditions, found {unique_conditions}")
+        return
+    
     plt.figure(figsize=(12, 6))
     
     # Sort by median hallucination rate
-    order = df_non.groupby('health_problem')['hallucination_rate'].median().sort_values(ascending=False).index
+    try:
+        order = df_clean.groupby('health_problem')['hallucination_rate'].median().sort_values(ascending=False).index
+    except Exception as e:
+        print(f"  ⚠️  Error calculating order: {e}")
+        order = df_clean['health_problem'].unique()
     
-    sns.violinplot(data=df_non, x='health_problem', y='hallucination_rate', order=order, palette='muted', inner='stick')
+    sns.violinplot(data=df_clean, x='health_problem', y='hallucination_rate', order=order, color='lightblue', inner='stick')
     
     plt.title('Hallucination Rate Distribution by Condition (Violin)', fontsize=16, fontweight='bold')
     plt.ylabel('Hallucination Rate')
